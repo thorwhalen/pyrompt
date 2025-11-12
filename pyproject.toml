@@ -1,0 +1,42 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyrompt"
+version = "0.0.4"
+description = "Managing & Operationalizing AI Prompts"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = []
+authors = []
+dependencies = []
+
+[project.license]
+text = "mit"
+
+[project.urls]
+Homepage = "https://github.com/thorwhalen/pyrompt"
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "tests",
+]
+doctest_optionflags = [
+    "NORMALIZE_WHITESPACE",
+    "ELLIPSIS",
+]
