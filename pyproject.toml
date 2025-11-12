@@ -10,9 +10,59 @@ version = "0.0.4"
 description = "Managing & Operationalizing AI Prompts"
 readme = "README.md"
 requires-python = ">=3.8"
-keywords = []
-authors = []
-dependencies = []
+keywords = [
+    "prompts",
+    "templates",
+    "ai",
+    "llm",
+    "openai",
+    "jinja2",
+    "mustache",
+    "semantic-search",
+]
+authors = [
+    {name = "Thor Whalen", email = "thorwhalen1@gmail.com"},
+]
+dependencies = [
+    "dol>=0.2.40",
+    "i2>=0.1.0",
+]
+
+[project.optional-dependencies]
+# Template engines
+jinja2 = ["jinja2>=3.0"]
+mustache = ["pystache>=0.6"]
+
+# AI operations
+oa = ["oa>=0.1.0"]
+
+# Semantic search
+search = [
+    "oa>=0.1.0",
+    "numpy>=1.20",
+]
+
+# GitHub integration
+github = [
+    "PyGithub>=1.55",
+    "gitpython>=3.1",
+]
+
+# All template engines
+engines = ["pyrompt[jinja2,mustache]"]
+
+# Full functionality
+all = [
+    "pyrompt[jinja2,mustache,oa,search,github]",
+]
+
+# Development dependencies
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.10",
+    "black>=21.0",
+    "ruff>=0.1.0",
+]
 
 [project.license]
 text = "mit"
@@ -34,7 +84,7 @@ select = [
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
-    "tests",
+    "pyrompt/tests",
 ]
 doctest_optionflags = [
     "NORMALIZE_WHITESPACE",
