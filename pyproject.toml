@@ -20,6 +20,9 @@ text = "mit"
 [project.urls]
 Homepage = ""
 
+[project.scripts]
+pyrompt = "pyrompt.cli:main"
+
 [tool.ruff]
 line-length = 88
 target-version = "py310"

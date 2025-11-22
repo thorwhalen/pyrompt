@@ -65,6 +65,19 @@ except ImportError:
 # Storage utilities
 from pyrompt.stores import get_default_base_path
 
+# Utility functions
+from pyrompt.util import (
+    quick_setup,
+    import_from_dict,
+    export_to_dict,
+    validate_template,
+    merge_collections,
+    list_available_engines,
+    render_template_file,
+    create_project_structure,
+    get_stats,
+)
+
 
 __all__ = [
     # Core
@@ -90,6 +103,15 @@ __all__ = [
 
     # Utilities
     'get_default_base_path',
+    'quick_setup',
+    'import_from_dict',
+    'export_to_dict',
+    'validate_template',
+    'merge_collections',
+    'list_available_engines',
+    'render_template_file',
+    'create_project_structure',
+    'get_stats',
 ]
 
 
