@@ -1,7 +1,5 @@
 [build-system]
-requires = [
-    "hatchling",
-]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
@@ -26,42 +24,21 @@ pyrompt = "pyrompt.cli:main"
 [tool.ruff]
 line-length = 88
 target-version = "py310"
-exclude = [
-    "tests",
-    "examples",
-    "scrap",
-]
+exclude = ["tests", "examples", "scrap"]
 
 [tool.ruff.lint]
-select = [
-    "D100",
-]
-ignore = [
-    "D203",
-    "E501",
-    "B905",
-]
+select = ["D100"]
+ignore = ["D203", "E501", "B905"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = [
-    "D",
-]
-"examples/*" = [
-    "D",
-]
-"scrap/*" = [
-    "D",
-]
+"**/tests/*" = ["D"]
+"**/examples/*" = ["D"]
+"**/scrap/*" = ["D"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-testpaths = [
-    "tests",
-]
-doctest_optionflags = [
-    "NORMALIZE_WHITESPACE",
-    "ELLIPSIS",
-]
+testpaths = ["tests"]
+doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
