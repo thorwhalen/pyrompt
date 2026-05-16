@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 keywords = []
 authors = []
-dependencies = []
+dependencies = ["dol"]
 
 [project.license]
 text = "mit"
