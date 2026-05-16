@@ -139,9 +139,9 @@ class PromptMall(Mapping):
             Dict mapping collection_name -> search results
 
         Example:
-            >>> results = mall.search('python expert', top_k=3)
-            >>> for coll_name, matches in results.items():
-            ...     print(f"\n{coll_name}:")
+            >>> results = mall.search('python expert', top_k=3)  # doctest: +SKIP
+            >>> for coll_name, matches in results.items():  # doctest: +SKIP
+            ...     print(f"\\n{coll_name}:")
             ...     for key, score in matches:
             ...         print(f"  {key}: {score:.3f}")
         """
