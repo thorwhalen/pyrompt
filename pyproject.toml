@@ -16,7 +16,7 @@ dependencies = ["dol"]
 text = "mit"
 
 [project.urls]
-Homepage = ""
+Homepage = "https://github.com/thorwhalen/pyrompt"
 
 [project.scripts]
 pyrompt = "pyrompt.cli:main"
