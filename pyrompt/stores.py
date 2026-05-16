@@ -8,7 +8,14 @@ import os
 from pathlib import Path
 from typing import Optional
 
-from dol import Files, TextFiles, JsonFiles, wrap_kvs, filt_iter, add_ipython_key_completions
+from dol import (
+    Files,
+    TextFiles,
+    JsonFiles,
+    wrap_kvs,
+    filt_iter,
+    add_ipython_key_completions,
+)
 
 
 def get_default_base_path() -> str:
@@ -19,20 +26,20 @@ def get_default_base_path() -> str:
         - Windows: %LOCALAPPDATA%/pyrompt
         - macOS/Linux: ~/.local/share/pyrompt
     """
-    if os.name == 'nt':  # Windows
-        base = os.getenv('LOCALAPPDATA')
+    if os.name == "nt":  # Windows
+        base = os.getenv("LOCALAPPDATA")
         if not base:
-            base = os.path.expanduser('~')
-        return os.path.join(base, 'pyrompt')
+            base = os.path.expanduser("~")
+        return os.path.join(base, "pyrompt")
     else:  # macOS/Linux
         # Check for XDG_DATA_HOME first
-        xdg_data = os.getenv('XDG_DATA_HOME')
+        xdg_data = os.getenv("XDG_DATA_HOME")
         if xdg_data:
-            return os.path.join(xdg_data, 'pyrompt')
-        return os.path.expanduser('~/.local/share/pyrompt')
+            return os.path.join(xdg_data, "pyrompt")
+        return os.path.expanduser("~/.local/share/pyrompt")
 
 
-def mk_prompt_store(rootdir: str, extension: str = 'txt'):
+def mk_prompt_store(rootdir: str, extension: str = "txt"):
     """
     Create a file store for prompts with clean interface.
 
@@ -60,14 +67,14 @@ def mk_prompt_store(rootdir: str, extension: str = 'txt'):
     base = TextFiles(rootdir, max_levels=0)
 
     # Filter for specific extension
-    ext_with_dot = f'.{extension}'
+    ext_with_dot = f".{extension}"
     filtered = filt_iter(base, filt=filt_iter.suffixes(ext_with_dot))
 
     # Hide extension from users
     store = wrap_kvs(
         filtered,
-        key_of_id=lambda k: k.replace(ext_with_dot, ''),
-        id_of_key=lambda k: f'{k}{ext_with_dot}'
+        key_of_id=lambda k: k.replace(ext_with_dot, ""),
+        id_of_key=lambda k: f"{k}{ext_with_dot}",
     )
 
     # Add tab completion support
@@ -97,7 +104,7 @@ def mk_template_store(rootdir: str, extensions: Optional[list] = None):
     Path(rootdir).mkdir(parents=True, exist_ok=True)
 
     if extensions is None:
-        extensions = ['.txt', '.jinja2', '.j2', '.jinja', '.mustache', '.hbs']
+        extensions = [".txt", ".jinja2", ".j2", ".jinja", ".mustache", ".hbs"]
 
     # Start with text files
     base = TextFiles(rootdir, max_levels=0)
@@ -109,7 +116,7 @@ def mk_template_store(rootdir: str, extensions: Optional[list] = None):
     return add_ipython_key_completions(filtered)
 
 
-def mk_metadata_store(rootdir: str, for_type: str = 'prompts'):
+def mk_metadata_store(rootdir: str, for_type: str = "prompts"):
     """
     Create a JSON metadata store.
 
@@ -132,10 +139,7 @@ def mk_metadata_store(rootdir: str, for_type: str = 'prompts'):
     return JsonFiles(rootdir, max_levels=0)
 
 
-def mk_collection_path(
-    collection_name: str,
-    base_path: Optional[str] = None
-) -> Path:
+def mk_collection_path(collection_name: str, base_path: Optional[str] = None) -> Path:
     """
     Get the path for a collection.
 
@@ -149,17 +153,15 @@ def mk_collection_path(
     if base_path is None:
         base_path = get_default_base_path()
 
-    base_path = os.getenv('PYROMPT_DATA_DIR', base_path)
+    base_path = os.getenv("PYROMPT_DATA_DIR", base_path)
 
-    collection_path = Path(base_path) / 'collections' / collection_name
+    collection_path = Path(base_path) / "collections" / collection_name
     return collection_path
 
 
 # Utility function to create all stores for a collection
 def mk_collection_stores(
-    collection_name: str,
-    base_path: Optional[str] = None,
-    create_metadata: bool = False
+    collection_name: str, base_path: Optional[str] = None, create_metadata: bool = False
 ) -> dict:
     """
     Create all stores for a collection.
@@ -175,18 +177,16 @@ def mk_collection_stores(
     collection_path = mk_collection_path(collection_name, base_path)
 
     stores = {
-        'prompts': mk_prompt_store(str(collection_path / 'prompts')),
-        'templates': mk_template_store(str(collection_path / 'templates')),
+        "prompts": mk_prompt_store(str(collection_path / "prompts")),
+        "templates": mk_template_store(str(collection_path / "templates")),
     }
 
     if create_metadata:
-        stores['prompt_meta'] = mk_metadata_store(
-            str(collection_path / '_prompt_meta'),
-            for_type='prompts'
+        stores["prompt_meta"] = mk_metadata_store(
+            str(collection_path / "_prompt_meta"), for_type="prompts"
         )
-        stores['template_meta'] = mk_metadata_store(
-            str(collection_path / '_template_meta'),
-            for_type='templates'
+        stores["template_meta"] = mk_metadata_store(
+            str(collection_path / "_template_meta"), for_type="templates"
         )
 
     return stores

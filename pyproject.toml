@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyrompt"
-version = "0.0.1"
+version = "0.0.5"
 description = "There is a bit of an air of mystery around this project..."
 readme = "README.md"
 requires-python = ">=3.10"

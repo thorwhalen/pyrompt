@@ -21,7 +21,7 @@ Main Components:
     - GitHubPromptCollection: GitHub-backed collections
 """
 
-__version__ = '0.0.4'
+__version__ = "0.0.4"
 
 # Core collections
 from pyrompt.base import PromptCollection, TemplateCollection
@@ -41,6 +41,7 @@ from pyrompt.engines import (
 # Semantic search (optional - requires numpy + oa)
 try:
     from pyrompt.search import SemanticIndex
+
     _HAVE_SEARCH = True
 except ImportError:
     _HAVE_SEARCH = False
@@ -54,6 +55,7 @@ try:
         fork_collection,
         clone_collection,
     )
+
     _HAVE_GITHUB = True
 except ImportError:
     _HAVE_GITHUB = False
@@ -81,44 +83,40 @@ from pyrompt.util import (
 
 __all__ = [
     # Core
-    'PromptCollection',
-    'TemplateCollection',
-    'PromptMall',
-
+    "PromptCollection",
+    "TemplateCollection",
+    "PromptMall",
     # Template engines
-    'TemplateEngine',
-    'register_engine',
-    'get_engine',
-    'list_engines',
-    'detect_engine',
-
+    "TemplateEngine",
+    "register_engine",
+    "get_engine",
+    "list_engines",
+    "detect_engine",
     # Search (optional)
-    'SemanticIndex',
-
+    "SemanticIndex",
     # GitHub (optional)
-    'GitHubPromptCollection',
-    'discover_prompt_collections',
-    'fork_collection',
-    'clone_collection',
-
+    "GitHubPromptCollection",
+    "discover_prompt_collections",
+    "fork_collection",
+    "clone_collection",
     # Utilities
-    'get_default_base_path',
-    'quick_setup',
-    'import_from_dict',
-    'export_to_dict',
-    'validate_template',
-    'merge_collections',
-    'list_available_engines',
-    'render_template_file',
-    'create_project_structure',
-    'get_stats',
+    "get_default_base_path",
+    "quick_setup",
+    "import_from_dict",
+    "export_to_dict",
+    "validate_template",
+    "merge_collections",
+    "list_available_engines",
+    "render_template_file",
+    "create_project_structure",
+    "get_stats",
 ]
 
 
 def _check_optional_dependencies():
     """Check which optional dependencies are available."""
     status = {
-        'search': _HAVE_SEARCH,
-        'github': _HAVE_GITHUB,
+        "search": _HAVE_SEARCH,
+        "github": _HAVE_GITHUB,
     }
     return status

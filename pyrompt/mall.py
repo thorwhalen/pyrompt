@@ -31,7 +31,7 @@ class PromptMall(Mapping):
         *,
         base_path: Optional[str] = None,
         collection_names: Optional[List[str]] = None,
-        with_metadata: bool = False
+        with_metadata: bool = False,
     ):
         """
         Create a mall (collection of collections).
@@ -51,18 +51,16 @@ class PromptMall(Mapping):
 
         # Storage for collections
         self._collections: Dict[str, PromptCollection] = {}
-        self._collection_types: Dict[str, str] = {}  # Track type: 'prompt' or 'template'
+        self._collection_types: Dict[
+            str, str
+        ] = {}  # Track type: 'prompt' or 'template'
 
         # Create initial collections
         if collection_names:
             for name in collection_names:
-                self._create_collection(name, 'prompt')
+                self._create_collection(name, "prompt")
 
-    def _create_collection(
-        self,
-        name: str,
-        collection_type: str = 'prompt'
-    ):
+    def _create_collection(self, name: str, collection_type: str = "prompt"):
         """
         Create a new collection.
 
@@ -70,28 +68,24 @@ class PromptMall(Mapping):
             name: Collection name
             collection_type: 'prompt' or 'template'
         """
-        if collection_type == 'prompt':
+        if collection_type == "prompt":
             self._collections[name] = PromptCollection(
                 f"{self.workspace_name}_{name}",
                 base_path=self.base_path,
-                with_metadata=self.with_metadata
+                with_metadata=self.with_metadata,
             )
-        elif collection_type == 'template':
+        elif collection_type == "template":
             self._collections[name] = TemplateCollection(
                 f"{self.workspace_name}_{name}",
                 base_path=self.base_path,
-                with_metadata=self.with_metadata
+                with_metadata=self.with_metadata,
             )
         else:
             raise ValueError(f"Unknown collection type: {collection_type}")
 
         self._collection_types[name] = collection_type
 
-    def add_collection(
-        self,
-        name: str,
-        collection_type: str = 'prompt'
-    ):
+    def add_collection(self, name: str, collection_type: str = "prompt"):
         """
         Add a new collection to the mall.
 
@@ -122,10 +116,7 @@ class PromptMall(Mapping):
             del self._collection_types[name]
 
     def search(
-        self,
-        query: str,
-        collections: Optional[List[str]] = None,
-        **search_kwargs
+        self, query: str, collections: Optional[List[str]] = None, **search_kwargs
     ) -> Dict[str, List[tuple]]:
         """
         Search across multiple collections.
@@ -186,7 +177,7 @@ class PromptMall(Mapping):
     def __getitem__(self, key: str):
         if key not in self._collections:
             # Auto-create collection on first access (as prompt collection)
-            self._create_collection(key, 'prompt')
+            self._create_collection(key, "prompt")
         return self._collections[key]
 
     def __iter__(self):
@@ -200,8 +191,7 @@ class PromptMall(Mapping):
 
     def __repr__(self):
         return (
-            f"PromptMall('{self.workspace_name}', "
-            f"{len(self._collections)} collections)"
+            f"PromptMall('{self.workspace_name}', {len(self._collections)} collections)"
         )
 
     def keys(self):

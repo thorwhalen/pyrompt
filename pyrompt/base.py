@@ -15,7 +15,12 @@ from pyrompt.stores import (
     mk_collection_path,
     get_default_base_path,
 )
-from pyrompt.engines import detect_engine, get_engine, get_engine_by_extension, TemplateEngine
+from pyrompt.engines import (
+    detect_engine,
+    get_engine,
+    get_engine_by_extension,
+    TemplateEngine,
+)
 
 
 class PromptCollection(MutableMapping):
@@ -39,7 +44,7 @@ class PromptCollection(MutableMapping):
         *,
         base_path: Optional[str] = None,
         with_metadata: bool = False,
-        store_factory: Optional[Callable] = None
+        store_factory: Optional[Callable] = None,
     ):
         """
         Create or open a prompt collection.
@@ -61,14 +66,14 @@ class PromptCollection(MutableMapping):
         if store_factory:
             self._store = store_factory()
         else:
-            prompts_dir = self.collection_dir / 'prompts'
+            prompts_dir = self.collection_dir / "prompts"
             prompts_dir.mkdir(exist_ok=True)
             self._store = mk_prompt_store(str(prompts_dir))
 
         # Optional metadata store
         self.meta = None
         if with_metadata:
-            meta_dir = self.collection_dir / '_prompt_meta'
+            meta_dir = self.collection_dir / "_prompt_meta"
             meta_dir.mkdir(exist_ok=True)
             self.meta = mk_metadata_store(str(meta_dir))
 
@@ -122,7 +127,7 @@ class TemplateCollection(MutableMapping):
         *,
         base_path: Optional[str] = None,
         with_metadata: bool = False,
-        default_engine: str = 'format'
+        default_engine: str = "format",
     ):
         """
         Create or open a template collection.
@@ -139,7 +144,7 @@ class TemplateCollection(MutableMapping):
         self.default_engine = default_engine
 
         # Create template directory
-        templates_dir = self.collection_dir / 'templates'
+        templates_dir = self.collection_dir / "templates"
         templates_dir.mkdir(parents=True, exist_ok=True)
 
         # Store accepts any extension - we handle detection
@@ -148,7 +153,7 @@ class TemplateCollection(MutableMapping):
         # Metadata
         self.meta = None
         if with_metadata:
-            meta_dir = self.collection_dir / '_template_meta'
+            meta_dir = self.collection_dir / "_template_meta"
             meta_dir.mkdir(exist_ok=True)
             self.meta = mk_metadata_store(str(meta_dir))
 
@@ -163,17 +168,17 @@ class TemplateCollection(MutableMapping):
             TemplateEngine instance
         """
         # Extract extension(s) from key
-        parts = key.split('.')
+        parts = key.split(".")
         if len(parts) > 1:
             # Try longest extension first (e.g., .jinja2.txt -> .jinja2)
             for i in range(len(parts) - 1):
-                ext = '.' + '.'.join(parts[i+1:])
+                ext = "." + ".".join(parts[i + 1 :])
                 engine = get_engine_by_extension(ext)
                 if engine:
                     return engine
 
                 # Also try individual extensions
-                single_ext = '.' + parts[i+1]
+                single_ext = "." + parts[i + 1]
                 engine = get_engine_by_extension(single_ext)
                 if engine:
                     return engine
@@ -252,24 +257,17 @@ class TemplateCollection(MutableMapping):
         try:
             from oa import prompt_function
         except ImportError:
-            raise ImportError(
-                "oa not installed. Install with: pip install oa"
-            )
+            raise ImportError("oa not installed. Install with: pip install oa")
 
         template_str = self._store[key]
         parse_info = self.parse(key)
 
         return prompt_function(
-            template_str,
-            defaults=parse_info.get('defaults', {}),
-            **prompt_func_kwargs
+            template_str, defaults=parse_info.get("defaults", {}), **prompt_func_kwargs
         )
 
     def to_prompt_json_function(
-        self,
-        key: str,
-        json_schema: dict,
-        **prompt_func_kwargs
+        self, key: str, json_schema: dict, **prompt_func_kwargs
     ):
         """
         Convert template to JSON-returning AI function.
@@ -301,9 +299,7 @@ class TemplateCollection(MutableMapping):
         try:
             from oa import prompt_json_function
         except ImportError:
-            raise ImportError(
-                "oa not installed. Install with: pip install oa"
-            )
+            raise ImportError("oa not installed. Install with: pip install oa")
 
         template_str = self._store[key]
         parse_info = self.parse(key)
@@ -311,14 +307,12 @@ class TemplateCollection(MutableMapping):
         return prompt_json_function(
             template_str,
             json_schema=json_schema,
-            defaults=parse_info.get('defaults', {}),
-            **prompt_func_kwargs
+            defaults=parse_info.get("defaults", {}),
+            **prompt_func_kwargs,
         )
 
     def create_prompt_functions(
-        self,
-        keys: Optional[List[str]] = None,
-        **common_kwargs
+        self, keys: Optional[List[str]] = None, **common_kwargs
     ):
         """
         Create PromptFuncs collection from templates.
@@ -337,19 +331,14 @@ class TemplateCollection(MutableMapping):
         try:
             from oa import PromptFuncs
         except ImportError:
-            raise ImportError(
-                "oa not installed. Install with: pip install oa"
-            )
+            raise ImportError("oa not installed. Install with: pip install oa")
 
         keys = keys or list(self._store.keys())
 
         # Create dict of template_name -> template_string
         template_dict = {k: self._store[k] for k in keys}
 
-        return PromptFuncs(
-            template_store=template_dict,
-            **common_kwargs
-        )
+        return PromptFuncs(template_store=template_dict, **common_kwargs)
 
     # MutableMapping interface delegates to _store
     def __getitem__(self, key: str) -> str:

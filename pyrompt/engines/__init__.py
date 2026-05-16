@@ -141,7 +141,7 @@ def detect_engine(content: str, extension: str = None) -> TemplateEngine:
             return engine
 
     # Default to format engine
-    default_engine = get_engine('format')
+    default_engine = get_engine("format")
     if default_engine is None:
         raise RuntimeError("No default 'format' engine registered")
     return default_engine
@@ -174,10 +174,10 @@ except ImportError:
 
 
 __all__ = [
-    'TemplateEngine',
-    'register_engine',
-    'get_engine',
-    'get_engine_by_extension',
-    'detect_engine',
-    'list_engines',
+    "TemplateEngine",
+    "register_engine",
+    "get_engine",
+    "get_engine_by_extension",
+    "detect_engine",
+    "list_engines",
 ]

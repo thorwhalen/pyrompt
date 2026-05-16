@@ -9,6 +9,7 @@ from collections.abc import Mapping
 
 try:
     import numpy as np
+
     HAVE_NUMPY = True
 except ImportError:
     HAVE_NUMPY = False
@@ -35,8 +36,8 @@ class SemanticIndex:
         collection: Mapping[str, str],
         *,
         auto_update: bool = False,
-        embedding_model: str = 'text-embedding-3-small',
-        batch_size: int = 100
+        embedding_model: str = "text-embedding-3-small",
+        batch_size: int = 100,
     ):
         """
         Create semantic index for a collection.
@@ -57,6 +58,7 @@ class SemanticIndex:
 
         try:
             from oa import embeddings
+
             self._embeddings_func = embeddings
         except ImportError:
             raise ImportError(
@@ -92,19 +94,15 @@ class SemanticIndex:
                 segments=texts,
                 batch_size=self.batch_size,
                 model=self.embedding_model,
-                verbosity=0
+                verbosity=0,
             )
         except (ImportError, Exception):
             # Fall back to regular embeddings
-            embedding_vectors = self._embeddings_func(
-                texts,
-                model=self.embedding_model
-            )
+            embedding_vectors = self._embeddings_func(texts, model=self.embedding_model)
 
         # Store embeddings
         self._embeddings = {
-            key: np.array(emb)
-            for key, emb in zip(keys, embedding_vectors)
+            key: np.array(emb) for key, emb in zip(keys, embedding_vectors)
         }
 
     def add(self, key: str):
@@ -133,7 +131,7 @@ class SemanticIndex:
         query: str,
         top_k: int = 5,
         filters: Optional[dict] = None,
-        diversity_threshold: Optional[float] = None
+        diversity_threshold: Optional[float] = None,
     ) -> List[Tuple[str, float]]:
         """
         Search for similar prompts.
@@ -171,17 +169,14 @@ class SemanticIndex:
         similarities.sort(key=lambda x: x[1], reverse=True)
 
         # Apply filters if provided
-        if filters and hasattr(self.collection, 'meta'):
+        if filters and hasattr(self.collection, "meta"):
             similarities = [
-                (k, s) for k, s in similarities
-                if self._matches_filters(k, filters)
+                (k, s) for k, s in similarities if self._matches_filters(k, filters)
             ]
 
         # Apply diversity if requested
         if diversity_threshold:
-            similarities = self._diversify_results(
-                similarities, diversity_threshold
-            )
+            similarities = self._diversify_results(similarities, diversity_threshold)
 
         return similarities[:top_k]
 
@@ -196,7 +191,7 @@ class SemanticIndex:
         Returns:
             True if item matches all filters
         """
-        if not hasattr(self.collection, 'meta') or self.collection.meta is None:
+        if not hasattr(self.collection, "meta") or self.collection.meta is None:
             return True
 
         if key not in self.collection.meta:
@@ -220,9 +215,7 @@ class SemanticIndex:
         return True
 
     def _diversify_results(
-        self,
-        results: List[Tuple[str, float]],
-        threshold: float
+        self, results: List[Tuple[str, float]], threshold: float
     ) -> List[Tuple[str, float]]:
         """
         Remove results too similar to each other.

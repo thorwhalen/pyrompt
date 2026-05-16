@@ -15,12 +15,14 @@ from collections.abc import MutableMapping
 
 try:
     from github import Github, GithubException
+
     HAVE_GITHUB = True
 except ImportError:
     HAVE_GITHUB = False
 
 try:
     import git
+
     HAVE_GITPYTHON = True
 except ImportError:
     HAVE_GITPYTHON = False
@@ -50,9 +52,9 @@ class GitHubPromptCollection(MutableMapping):
         *,
         token: Optional[str] = None,
         readonly: bool = True,
-        branch: str = 'main',
+        branch: str = "main",
         local_cache: Optional[str] = None,
-        collection_type: str = 'prompts'  # 'prompts' or 'templates'
+        collection_type: str = "prompts",  # 'prompts' or 'templates'
     ):
         """
         Create GitHub-backed collection.
@@ -70,16 +72,12 @@ class GitHubPromptCollection(MutableMapping):
             ValueError: If repo doesn't end with '_pyrompt'
         """
         if not HAVE_GITHUB:
-            raise ImportError(
-                "PyGithub required. Install with: pip install PyGithub"
-            )
+            raise ImportError("PyGithub required. Install with: pip install PyGithub")
 
         if not HAVE_GITPYTHON:
-            raise ImportError(
-                "gitpython required. Install with: pip install gitpython"
-            )
+            raise ImportError("gitpython required. Install with: pip install gitpython")
 
-        if not repo.endswith('_pyrompt'):
+        if not repo.endswith("_pyrompt"):
             raise ValueError("Repository must end with '_pyrompt'")
 
         self.repo_name = repo
@@ -101,17 +99,18 @@ class GitHubPromptCollection(MutableMapping):
 
         # Set up local store
         from pyrompt.stores import mk_prompt_store, mk_template_store
+
         cache_path = Path(self.local_cache) / collection_type
 
-        if collection_type == 'prompts':
+        if collection_type == "prompts":
             self._store = mk_prompt_store(str(cache_path))
         else:
             self._store = mk_template_store(str(cache_path))
 
     def _default_cache_path(self) -> str:
         """Get default cache path for this repo."""
-        cache_base = Path.home() / '.cache' / 'pyrompt' / 'github'
-        return str(cache_base / self.repo_name.replace('/', '_'))
+        cache_base = Path.home() / ".cache" / "pyrompt" / "github"
+        return str(cache_base / self.repo_name.replace("/", "_"))
 
     def _ensure_local_cache(self):
         """Clone or pull repo to local cache."""
@@ -120,7 +119,7 @@ class GitHubPromptCollection(MutableMapping):
             git.Repo.clone_from(
                 f"https://github.com/{self.repo_name}",
                 self.local_cache,
-                branch=self.branch
+                branch=self.branch,
             )
         else:
             # Pull latest
@@ -154,7 +153,7 @@ class GitHubPromptCollection(MutableMapping):
 
             # Push
             try:
-                origin = repo.remote('origin')
+                origin = repo.remote("origin")
                 origin.push(self.branch)
             except Exception as e:
                 raise RuntimeError(f"Failed to push to GitHub: {e}")
@@ -186,8 +185,8 @@ class GitHubPromptCollection(MutableMapping):
 def discover_prompt_collections(
     search_term: Optional[str] = None,
     min_stars: int = 0,
-    language: str = 'Python',
-    max_results: int = 50
+    language: str = "Python",
+    max_results: int = 50,
 ) -> List[dict]:
     """
     Discover public *_pyrompt repositories on GitHub.
@@ -210,9 +209,7 @@ def discover_prompt_collections(
         ...     print(f"{repo['name']}: {repo['stars']} stars")
     """
     if not HAVE_GITHUB:
-        raise ImportError(
-            "PyGithub required. Install with: pip install PyGithub"
-        )
+        raise ImportError("PyGithub required. Install with: pip install PyGithub")
 
     gh = Github()
 
@@ -220,16 +217,16 @@ def discover_prompt_collections(
     query_parts = []
     if search_term:
         query_parts.append(search_term)
-    query_parts.append('_pyrompt in:name')
+    query_parts.append("_pyrompt in:name")
     if language:
-        query_parts.append(f'language:{language}')
+        query_parts.append(f"language:{language}")
     if min_stars:
-        query_parts.append(f'stars:>={min_stars}')
+        query_parts.append(f"stars:>={min_stars}")
 
-    query = ' '.join(query_parts)
+    query = " ".join(query_parts)
 
     # Search
-    repos = gh.search_repositories(query, sort='stars', order='desc')
+    repos = gh.search_repositories(query, sort="stars", order="desc")
 
     # Format results
     results = []
@@ -237,23 +234,23 @@ def discover_prompt_collections(
         if i >= max_results:
             break
 
-        results.append({
-            'name': repo.full_name,
-            'description': repo.description,
-            'stars': repo.stargazers_count,
-            'forks': repo.forks_count,
-            'url': repo.html_url,
-            'updated': repo.updated_at.isoformat() if repo.updated_at else None
-        })
+        results.append(
+            {
+                "name": repo.full_name,
+                "description": repo.description,
+                "stars": repo.stargazers_count,
+                "forks": repo.forks_count,
+                "url": repo.html_url,
+                "updated": repo.updated_at.isoformat() if repo.updated_at else None,
+            }
+        )
 
     return results
 
 
 def fork_collection(
-    source: str,
-    token: str,
-    organization: Optional[str] = None
-) -> 'GitHubPromptCollection':
+    source: str, token: str, organization: Optional[str] = None
+) -> "GitHubPromptCollection":
     """
     Fork a collection to your account or organization.
 
@@ -272,9 +269,7 @@ def fork_collection(
         ... )
     """
     if not HAVE_GITHUB:
-        raise ImportError(
-            "PyGithub required. Install with: pip install PyGithub"
-        )
+        raise ImportError("PyGithub required. Install with: pip install PyGithub")
 
     gh = Github(token)
     source_repo = gh.get_repo(source)
@@ -286,18 +281,10 @@ def fork_collection(
         fork = source_repo.create_fork()
 
     # Return collection for fork
-    return GitHubPromptCollection(
-        repo=fork.full_name,
-        token=token,
-        readonly=False
-    )
+    return GitHubPromptCollection(repo=fork.full_name, token=token, readonly=False)
 
 
-def clone_collection(
-    repo: str,
-    local_path: str,
-    token: Optional[str] = None
-):
+def clone_collection(repo: str, local_path: str, token: Optional[str] = None):
     """
     Clone a GitHub collection to local directory.
 
@@ -313,9 +300,7 @@ def clone_collection(
         ... )
     """
     if not HAVE_GITPYTHON:
-        raise ImportError(
-            "gitpython required. Install with: pip install gitpython"
-        )
+        raise ImportError("gitpython required. Install with: pip install gitpython")
 
     url = f"https://github.com/{repo}"
     if token:

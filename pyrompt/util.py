@@ -11,7 +11,7 @@ def quick_setup(
     project_name: str,
     with_templates: bool = True,
     with_metadata: bool = False,
-    base_path: Optional[str] = None
+    base_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Quick setup for a new pyrompt project.
@@ -35,27 +35,21 @@ def quick_setup(
     from pyrompt import PromptCollection, TemplateCollection
 
     result = {
-        'prompts': PromptCollection(
-            project_name,
-            base_path=base_path,
-            with_metadata=with_metadata
+        "prompts": PromptCollection(
+            project_name, base_path=base_path, with_metadata=with_metadata
         )
     }
 
     if with_templates:
-        result['templates'] = TemplateCollection(
-            project_name,
-            base_path=base_path,
-            with_metadata=with_metadata
+        result["templates"] = TemplateCollection(
+            project_name, base_path=base_path, with_metadata=with_metadata
         )
 
     return result
 
 
 def import_from_dict(
-    collection,
-    prompts: Dict[str, str],
-    metadata: Optional[Dict[str, dict]] = None
+    collection, prompts: Dict[str, str], metadata: Optional[Dict[str, dict]] = None
 ):
     """
     Import prompts from a dictionary.
@@ -75,16 +69,13 @@ def import_from_dict(
     for key, value in prompts.items():
         collection[key] = value
 
-    if metadata and hasattr(collection, 'meta') and collection.meta is not None:
+    if metadata and hasattr(collection, "meta") and collection.meta is not None:
         for key, meta in metadata.items():
             if key in collection:
                 collection.meta[key] = meta
 
 
-def export_to_dict(
-    collection,
-    include_metadata: bool = True
-) -> Dict[str, Any]:
+def export_to_dict(collection, include_metadata: bool = True) -> Dict[str, Any]:
     """
     Export collection to a dictionary.
 
@@ -100,20 +91,18 @@ def export_to_dict(
         >>> data = export_to_dict(prompts)
         >>> print(data['prompts'])
     """
-    result = {
-        'prompts': {key: collection[key] for key in collection}
-    }
+    result = {"prompts": {key: collection[key] for key in collection}}
 
-    if include_metadata and hasattr(collection, 'meta') and collection.meta is not None:
-        result['metadata'] = {key: collection.meta[key] for key in collection.meta}
+    if include_metadata and hasattr(collection, "meta") and collection.meta is not None:
+        result["metadata"] = {key: collection.meta[key] for key in collection.meta}
 
     return result
 
 
 def validate_template(
     template_str: str,
-    engine_name: str = 'format',
-    required_params: Optional[List[str]] = None
+    engine_name: str = "format",
+    required_params: Optional[List[str]] = None,
 ) -> Dict[str, Any]:
     """
     Validate a template string.
@@ -134,48 +123,39 @@ def validate_template(
     """
     from pyrompt.engines import get_engine
 
-    result = {
-        'valid': True,
-        'errors': [],
-        'warnings': [],
-        'placeholders': []
-    }
+    result = {"valid": True, "errors": [], "warnings": [], "placeholders": []}
 
     # Get engine
     engine = get_engine(engine_name)
     if engine is None:
-        result['valid'] = False
-        result['errors'].append(f"Engine '{engine_name}' not found")
+        result["valid"] = False
+        result["errors"].append(f"Engine '{engine_name}' not found")
         return result
 
     # Try to parse
     try:
         parsed = engine.parse_template(template_str)
-        result['placeholders'] = parsed['placeholders']
+        result["placeholders"] = parsed["placeholders"]
     except Exception as e:
-        result['valid'] = False
-        result['errors'].append(f"Parse error: {str(e)}")
+        result["valid"] = False
+        result["errors"].append(f"Parse error: {str(e)}")
         return result
 
     # Check required params
     if required_params:
-        missing = set(required_params) - set(result['placeholders'])
+        missing = set(required_params) - set(result["placeholders"])
         if missing:
-            result['valid'] = False
-            result['errors'].append(f"Missing required parameters: {missing}")
+            result["valid"] = False
+            result["errors"].append(f"Missing required parameters: {missing}")
 
-        extra = set(result['placeholders']) - set(required_params)
+        extra = set(result["placeholders"]) - set(required_params)
         if extra:
-            result['warnings'].append(f"Extra parameters not in required list: {extra}")
+            result["warnings"].append(f"Extra parameters not in required list: {extra}")
 
     return result
 
 
-def merge_collections(
-    target,
-    *sources,
-    conflict_strategy: str = 'skip'
-):
+def merge_collections(target, *sources, conflict_strategy: str = "skip"):
     """
     Merge multiple collections into a target collection.
 
@@ -193,9 +173,9 @@ def merge_collections(
     for source in sources:
         for key in source:
             if key in target:
-                if conflict_strategy == 'skip':
+                if conflict_strategy == "skip":
                     continue
-                elif conflict_strategy == 'error':
+                elif conflict_strategy == "error":
                     raise ValueError(f"Key '{key}' already exists in target")
                 # else: overwrite
             target[key] = source[key]
@@ -219,18 +199,16 @@ def list_available_engines() -> Dict[str, Dict[str, Any]]:
     for name in list_engines():
         engine = get_engine(name)
         result[name] = {
-            'name': engine.name,
-            'extensions': engine.extensions,
-            'available': True
+            "name": engine.name,
+            "extensions": engine.extensions,
+            "available": True,
         }
 
     return result
 
 
 def render_template_file(
-    file_path: str,
-    output_path: Optional[str] = None,
-    **kwargs
+    file_path: str, output_path: Optional[str] = None, **kwargs
 ) -> str:
     """
     Render a template file directly.
@@ -252,11 +230,11 @@ def render_template_file(
     from pyrompt.engines import detect_engine
 
     # Read template
-    with open(file_path, 'r') as f:
+    with open(file_path, "r") as f:
         template_str = f.read()
 
     # Detect engine by extension
-    extension = '.' + file_path.split('.')[-1] if '.' in file_path else ''
+    extension = "." + file_path.split(".")[-1] if "." in file_path else ""
     engine = detect_engine(template_str, extension)
 
     # Render
@@ -265,16 +243,14 @@ def render_template_file(
     # Save if output_path provided
     if output_path:
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(output_path, 'w') as f:
+        with open(output_path, "w") as f:
             f.write(result)
 
     return result
 
 
 def create_project_structure(
-    project_name: str,
-    base_path: Optional[str] = None,
-    include_examples: bool = True
+    project_name: str, base_path: Optional[str] = None, include_examples: bool = True
 ) -> str:
     """
     Create a complete project structure for prompt management.
@@ -297,23 +273,25 @@ def create_project_structure(
 
     # Create collections
     prompts = PromptCollection(project_name, base_path=base_path, with_metadata=True)
-    templates = TemplateCollection(project_name, base_path=base_path, with_metadata=True)
+    templates = TemplateCollection(
+        project_name, base_path=base_path, with_metadata=True
+    )
 
     if include_examples:
         # Add example prompts
-        prompts['system_default'] = "You are a helpful AI assistant."
-        prompts.meta['system_default'] = {
-            'author': 'pyrompt',
-            'description': 'Default system prompt',
-            'tags': ['system', 'default']
+        prompts["system_default"] = "You are a helpful AI assistant."
+        prompts.meta["system_default"] = {
+            "author": "pyrompt",
+            "description": "Default system prompt",
+            "tags": ["system", "default"],
         }
 
         # Add example templates
-        templates['greeting.txt'] = "Hello {name}, welcome to {project}!"
-        templates.meta['greeting.txt'] = {
-            'author': 'pyrompt',
-            'description': 'Simple greeting template',
-            'parameters': ['name', 'project']
+        templates["greeting.txt"] = "Hello {name}, welcome to {project}!"
+        templates.meta["greeting.txt"] = {
+            "author": "pyrompt",
+            "description": "Simple greeting template",
+            "parameters": ["name", "project"],
         }
 
     return str(prompts.collection_dir.parent)
@@ -335,30 +313,32 @@ def get_stats(collection) -> Dict[str, Any]:
         >>> print(stats['total_prompts'])
     """
     stats = {
-        'total_prompts': len(collection),
-        'has_metadata': hasattr(collection, 'meta') and collection.meta is not None,
-        'keys': list(collection.keys()),
+        "total_prompts": len(collection),
+        "has_metadata": hasattr(collection, "meta") and collection.meta is not None,
+        "keys": list(collection.keys()),
     }
 
-    if stats['has_metadata']:
-        stats['prompts_with_metadata'] = len(collection.meta)
+    if stats["has_metadata"]:
+        stats["prompts_with_metadata"] = len(collection.meta)
 
     # Calculate sizes
     total_chars = sum(len(collection[k]) for k in collection)
-    stats['total_characters'] = total_chars
-    stats['average_length'] = total_chars / len(collection) if len(collection) > 0 else 0
+    stats["total_characters"] = total_chars
+    stats["average_length"] = (
+        total_chars / len(collection) if len(collection) > 0 else 0
+    )
 
     return stats
 
 
 __all__ = [
-    'quick_setup',
-    'import_from_dict',
-    'export_to_dict',
-    'validate_template',
-    'merge_collections',
-    'list_available_engines',
-    'render_template_file',
-    'create_project_structure',
-    'get_stats',
+    "quick_setup",
+    "import_from_dict",
+    "export_to_dict",
+    "validate_template",
+    "merge_collections",
+    "list_available_engines",
+    "render_template_file",
+    "create_project_structure",
+    "get_stats",
 ]

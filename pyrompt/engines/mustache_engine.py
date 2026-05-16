@@ -11,6 +11,7 @@ from pyrompt.engines import TemplateEngine, register_engine
 
 try:
     import pystache
+
     HAVE_PYSTACHE = True
 except ImportError:
     HAVE_PYSTACHE = False
@@ -34,8 +35,8 @@ class MustacheEngine(TemplateEngine):
         'Thank you!'
     """
 
-    name = 'mustache'
-    extensions = ['.mustache', '.hbs']
+    name = "mustache"
+    extensions = [".mustache", ".hbs"]
 
     def __init__(self):
         if not HAVE_PYSTACHE:
@@ -59,9 +60,9 @@ class MustacheEngine(TemplateEngine):
         placeholders = self._extract_vars(template_str)
 
         return {
-            'placeholders': sorted(list(set(placeholders))),  # Unique, sorted
-            'defaults': {},  # Mustache uses empty string for missing
-            'metadata': {'syntax': 'mustache'}
+            "placeholders": sorted(list(set(placeholders))),  # Unique, sorted
+            "defaults": {},  # Mustache uses empty string for missing
+            "metadata": {"syntax": "mustache"},
         }
 
     def _extract_vars(self, template_str: str) -> List[str]:
@@ -77,12 +78,12 @@ class MustacheEngine(TemplateEngine):
         placeholders = []
 
         # Pattern for {{variable}}
-        var_pattern = r'\{\{([^#^/!>&\{][^}]*)\}\}'
+        var_pattern = r"\{\{([^#^/!>&\{][^}]*)\}\}"
         variables = re.findall(var_pattern, template_str)
         placeholders.extend(v.strip() for v in variables)
 
         # Pattern for {{#section}} and {{^inverted}}
-        section_pattern = r'\{\{[#^]([^}]+)\}\}'
+        section_pattern = r"\{\{[#^]([^}]+)\}\}"
         sections = re.findall(section_pattern, template_str)
         placeholders.extend(s.strip() for s in sections)
 
@@ -116,15 +117,15 @@ class MustacheEngine(TemplateEngine):
         # Look for {{something}} pattern
         # Mustache typically has no spaces: {{name}}
         # Jinja2 typically has spaces: {{ name }}
-        if '{{' not in content:
+        if "{{" not in content:
             return False
 
         # Check for Mustache-specific syntax
         mustache_patterns = [
-            r'\{\{#',  # Sections: {{#section}}
-            r'\{\{\^',  # Inverted: {{^inverted}}
-            r'\{\{!',  # Comments: {{!comment}}
-            r'\{\{>',  # Partials: {{>partial}}
+            r"\{\{#",  # Sections: {{#section}}
+            r"\{\{\^",  # Inverted: {{^inverted}}
+            r"\{\{!",  # Comments: {{!comment}}
+            r"\{\{>",  # Partials: {{>partial}}
         ]
 
         for pattern in mustache_patterns:
@@ -133,8 +134,8 @@ class MustacheEngine(TemplateEngine):
 
         # If no Mustache-specific patterns, check for tight braces (no spaces)
         # This is a heuristic and not foolproof
-        tight_braces = re.search(r'\{\{[^\s{]', content)
-        spaced_braces = re.search(r'\{\{\s', content)
+        tight_braces = re.search(r"\{\{[^\s{]", content)
+        spaced_braces = re.search(r"\{\{\s", content)
 
         return tight_braces and not spaced_braces
 

@@ -10,6 +10,7 @@ from pyrompt.engines import TemplateEngine, register_engine
 
 try:
     import jinja2
+
     HAVE_JINJA2 = True
 except ImportError:
     HAVE_JINJA2 = False
@@ -32,18 +33,16 @@ class Jinja2Engine(TemplateEngine):
         'Hello friend!'
     """
 
-    name = 'jinja2'
-    extensions = ['.jinja2', '.j2', '.jinja']
+    name = "jinja2"
+    extensions = [".jinja2", ".j2", ".jinja"]
 
     def __init__(self):
         if not HAVE_JINJA2:
-            raise ImportError(
-                "jinja2 not installed. Install with: pip install jinja2"
-            )
+            raise ImportError("jinja2 not installed. Install with: pip install jinja2")
         # Create Jinja2 environment with safe defaults
         self.env = jinja2.Environment(
             autoescape=False,  # Don't auto-escape (we're not rendering HTML typically)
-            undefined=jinja2.Undefined  # Allow undefined variables
+            undefined=jinja2.Undefined,  # Allow undefined variables
         )
 
     def parse_template(self, template_str: str) -> dict:
@@ -67,16 +66,16 @@ class Jinja2Engine(TemplateEngine):
             # Users should provide defaults when calling render
 
             return {
-                'placeholders': sorted(placeholders),  # Sort for consistency
-                'defaults': {},  # Handled by Jinja2 itself via |default filter
-                'metadata': {'syntax': 'jinja2'}
+                "placeholders": sorted(placeholders),  # Sort for consistency
+                "defaults": {},  # Handled by Jinja2 itself via |default filter
+                "metadata": {"syntax": "jinja2"},
             }
         except jinja2.TemplateSyntaxError as e:
             # If parsing fails, return minimal info
             return {
-                'placeholders': [],
-                'defaults': {},
-                'metadata': {'syntax': 'jinja2', 'parse_error': str(e)}
+                "placeholders": [],
+                "defaults": {},
+                "metadata": {"syntax": "jinja2", "parse_error": str(e)},
             }
 
     def render(self, template_str: str, **kwargs) -> str:
@@ -107,9 +106,9 @@ class Jinja2Engine(TemplateEngine):
             True if content appears to use Jinja2 syntax
         """
         return (
-            ('{{' in content and '}}' in content) or
-            ('{%' in content and '%}' in content) or
-            ('{#' in content and '#}' in content)  # Comments
+            ("{{" in content and "}}" in content)
+            or ("{%" in content and "%}" in content)
+            or ("{#" in content and "#}" in content)  # Comments
         )
 
 
