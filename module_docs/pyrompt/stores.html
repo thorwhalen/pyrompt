@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.stores &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyrompt.tests" href="tests.html" />
+    <link rel="prev" title="pyrompt.search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">pyrompt.search</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyrompt.stores</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.stores.get_default_base_path"><code class="docutils literal notranslate"><span class="pre">get_default_base_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.stores.mk_collection_path"><code class="docutils literal notranslate"><span class="pre">mk_collection_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.stores.mk_collection_stores"><code class="docutils literal notranslate"><span class="pre">mk_collection_stores()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.stores.mk_metadata_store"><code class="docutils literal notranslate"><span class="pre">mk_metadata_store()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.stores.mk_prompt_store"><code class="docutils literal notranslate"><span class="pre">mk_prompt_store()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.stores.mk_template_store"><code class="docutils literal notranslate"><span class="pre">mk_template_store()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyrompt.stores</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/pyrompt/stores.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyrompt.stores">
+<span id="pyrompt-stores"></span><h1>pyrompt.stores<a class="headerlink" href="#module-pyrompt.stores" title="Link to this heading"></a></h1>
+<p>Storage layer for pyrompt using dol abstractions.</p>
+<p>Provides clean Mapping/MutableMapping interfaces to filesystem storage.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.stores.get_default_base_path">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.stores.</span></span><span class="sig-name descname"><span class="pre">get_default_base_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/pyrompt/stores.html#get_default_base_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.stores.get_default_base_path" title="Link to this definition"></a></dt>
+<dd><p>Get platform-appropriate base path for pyrompt data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>%LOCALAPPDATA%/pyrompt
+- macOS/Linux: ~/.local/share/pyrompt</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Windows</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.stores.mk_collection_path">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.stores.</span></span><span class="sig-name descname"><span class="pre">mk_collection_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="../../_modules/pyrompt/stores.html#mk_collection_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.stores.mk_collection_path" title="Link to this definition"></a></dt>
+<dd><p>Get the path for a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> – Name of the collection</p></li>
+<li><p><strong>base_path</strong> – Optional base path (uses default if None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path object for the collection directory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.stores.mk_collection_stores">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.stores.</span></span><span class="sig-name descname"><span class="pre">mk_collection_stores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/pyrompt/stores.html#mk_collection_stores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.stores.mk_collection_stores" title="Link to this definition"></a></dt>
+<dd><p>Create all stores for a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> – Name of the collection</p></li>
+<li><p><strong>base_path</strong> – Optional base path</p></li>
+<li><p><strong>create_metadata</strong> – Whether to create metadata stores</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘prompts’, ‘templates’, and optionally ‘prompt_meta’, ‘template_meta’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict with keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.stores.mk_metadata_store">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.stores.</span></span><span class="sig-name descname"><span class="pre">mk_metadata_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">for_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'prompts'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/stores.html#mk_metadata_store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.stores.mk_metadata_store" title="Link to this definition"></a></dt>
+<dd><p>Create a JSON metadata store.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootdir</strong> – Directory to store metadata</p></li>
+<li><p><strong>for_type</strong> – Type of metadata (just for documentation)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>MutableMapping[str, dict] with JSON file storage</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">store</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span><span class="s1">&#39;/tmp/meta&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;thor&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meta</span> <span class="o">=</span> <span class="n">store</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.stores.mk_prompt_store">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.stores.</span></span><span class="sig-name descname"><span class="pre">mk_prompt_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'txt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/stores.html#mk_prompt_store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.stores.mk_prompt_store" title="Link to this definition"></a></dt>
+<dd><p>Create a file store for prompts with clean interface.</p>
+<ul class="simple">
+<li><p>Keys don’t show extension</p></li>
+<li><p>Values are strings (not bytes)</p></li>
+<li><p>Supports tab completion</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootdir</strong> – Directory to store prompts</p></li>
+<li><p><strong>extension</strong> – File extension (without dot)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>MutableMapping[str, str] with file-backed storage</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">store</span> <span class="o">=</span> <span class="n">mk_prompt_store</span><span class="p">(</span><span class="s1">&#39;/tmp/prompts&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">store</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">])</span>
+<span class="go">Hello, {name}!</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.stores.mk_template_store">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.stores.</span></span><span class="sig-name descname"><span class="pre">mk_template_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/stores.html#mk_template_store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.stores.mk_template_store" title="Link to this definition"></a></dt>
+<dd><p>Create a template store that handles multiple extensions.</p>
+<p>Keeps the extension in the key so we can detect template engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootdir</strong> – Directory to store templates</p></li>
+<li><p><strong>extensions</strong> – List of extensions to support (with dots)
+Defaults to [‘.txt’, ‘.jinja2’, ‘.j2’, ‘.jinja’, ‘.mustache’, ‘.hbs’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>MutableMapping[str, str] with file-backed storage</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">store</span> <span class="o">=</span> <span class="n">mk_template_store</span><span class="p">(</span><span class="s1">&#39;/tmp/templates&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="p">[</span><span class="s1">&#39;greeting.jinja2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello {{ name }}!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="p">[</span><span class="s1">&#39;simple.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="search.html" class="btn btn-neutral float-left" title="pyrompt.search" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tests.html" class="btn btn-neutral float-right" title="pyrompt.tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

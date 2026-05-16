@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.engines &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyrompt.engines.format_engine" href="engines/format_engine.html" />
+    <link rel="prev" title="pyrompt.cli" href="cli.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyrompt.engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.engines.TemplateEngine"><code class="docutils literal notranslate"><span class="pre">TemplateEngine</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.engines.TemplateEngine.detect"><code class="docutils literal notranslate"><span class="pre">TemplateEngine.detect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.engines.TemplateEngine.parse_template"><code class="docutils literal notranslate"><span class="pre">TemplateEngine.parse_template()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.engines.TemplateEngine.render"><code class="docutils literal notranslate"><span class="pre">TemplateEngine.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.engines.detect_engine"><code class="docutils literal notranslate"><span class="pre">detect_engine()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.engines.get_engine"><code class="docutils literal notranslate"><span class="pre">get_engine()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.engines.get_engine_by_extension"><code class="docutils literal notranslate"><span class="pre">get_engine_by_extension()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.engines.list_engines"><code class="docutils literal notranslate"><span class="pre">list_engines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.engines.register_engine"><code class="docutils literal notranslate"><span class="pre">register_engine()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyrompt.engines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/pyrompt/engines.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyrompt.engines">
+<span id="pyrompt-engines"></span><h1>pyrompt.engines<a class="headerlink" href="#module-pyrompt.engines" title="Link to this heading"></a></h1>
+<p>Template engine plugin system for pyrompt.</p>
+<p>Provides extensible template engine support with auto-detection.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.engines.TemplateEngine">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.engines.</span></span><span class="sig-name descname"><span class="pre">TemplateEngine</span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#TemplateEngine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.TemplateEngine" title="Link to this definition"></a></dt>
+<dd><p>Abstract base class for template engines.</p>
+<p>Template engines parse and render templates with different syntaxes.
+They must provide:
+- name: Unique identifier (e.g., ‘format’, ‘jinja2’)
+- extensions: List of file extensions (e.g., [‘.jinja2’, ‘.j2’])
+- parse_template: Extract placeholders and defaults
+- render: Render template with values
+- detect: Optionally detect if content uses this engine</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.engines.TemplateEngine.detect">
+<span class="sig-name descname"><span class="pre">detect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#TemplateEngine.detect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.TemplateEngine.detect" title="Link to this definition"></a></dt>
+<dd><p>Detect if content uses this engine based on syntax.</p>
+<p>Used when extension doesn’t clearly indicate engine.
+Override to provide content-based detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>content</strong> – Template content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if content appears to use this engine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.engines.TemplateEngine.parse_template">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#TemplateEngine.parse_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.TemplateEngine.parse_template" title="Link to this definition"></a></dt>
+<dd><p>Parse template to extract structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>template_str</strong> – Template content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>‘placeholders’: list of parameter names</p></li>
+<li><p>’defaults’: dict of default values</p></li>
+<li><p>’metadata’: any engine-specific info</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict with keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.engines.TemplateEngine.render">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#TemplateEngine.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.TemplateEngine.render" title="Link to this definition"></a></dt>
+<dd><p>Render template with provided values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_str</strong> – Template content</p></li>
+<li><p><strong>**kwargs</strong> – Values to inject</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.engines.detect_engine">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.engines.</span></span><span class="sig-name descname"><span class="pre">detect_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#detect_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.detect_engine" title="Link to this definition"></a></dt>
+<dd><p>Detect appropriate engine for content.</p>
+<p>Priority:
+1. Extension match (if provided)
+2. Content-based detection
+3. Default (format)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – Template content</p></li>
+<li><p><strong>extension</strong> – Optional file extension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TemplateEngine instance (never None, falls back to ‘format’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.engines.get_engine">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.engines.</span></span><span class="sig-name descname"><span class="pre">get_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#get_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.get_engine" title="Link to this definition"></a></dt>
+<dd><p>Get engine by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Engine name (e.g., ‘format’, ‘jinja2’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TemplateEngine instance or None if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.engines.get_engine_by_extension">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.engines.</span></span><span class="sig-name descname"><span class="pre">get_engine_by_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#get_engine_by_extension"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.get_engine_by_extension" title="Link to this definition"></a></dt>
+<dd><p>Get engine that handles a given extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>extension</strong> – File extension (e.g., ‘.jinja2’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TemplateEngine instance or None if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.engines.list_engines">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.engines.</span></span><span class="sig-name descname"><span class="pre">list_engines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/pyrompt/engines.html#list_engines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.list_engines" title="Link to this definition"></a></dt>
+<dd><p>List all registered engine names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of engine names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.engines.register_engine">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.engines.</span></span><span class="sig-name descname"><span class="pre">register_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/engines.html#register_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.engines.register_engine" title="Link to this definition"></a></dt>
+<dd><p>Register a template engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>engine</strong> – TemplateEngine instance to register</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cli.html" class="btn btn-neutral float-left" title="pyrompt.cli" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="engines/format_engine.html" class="btn btn-neutral float-right" title="pyrompt.engines.format_engine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

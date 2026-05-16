@@ -1,0 +1,4 @@
+pyrompt.tests.test_mall
+=======================
+.. automodule:: pyrompt.tests.test_mall
+   :members:

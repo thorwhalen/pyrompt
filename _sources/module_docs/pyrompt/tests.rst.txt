@@ -1,0 +1,4 @@
+pyrompt.tests
+=============
+.. automodule:: pyrompt.tests
+   :members:

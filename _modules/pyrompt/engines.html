@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.engines &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyrompt.engines</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyrompt.engines</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Template engine plugin system for pyrompt.</span>
+
+<span class="sd">Provides extensible template engine support with auto-detection.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+
+<div class="viewcode-block" id="TemplateEngine">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.TemplateEngine">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TemplateEngine</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract base class for template engines.</span>
+
+<span class="sd">    Template engines parse and render templates with different syntaxes.</span>
+<span class="sd">    They must provide:</span>
+<span class="sd">    - name: Unique identifier (e.g., &#39;format&#39;, &#39;jinja2&#39;)</span>
+<span class="sd">    - extensions: List of file extensions (e.g., [&#39;.jinja2&#39;, &#39;.j2&#39;])</span>
+<span class="sd">    - parse_template: Extract placeholders and defaults</span>
+<span class="sd">    - render: Render template with values</span>
+<span class="sd">    - detect: Optionally detect if content uses this engine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># e.g., &#39;format&#39;, &#39;jinja2&#39;, &#39;mustache&#39;</span>
+    <span class="n">extensions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1"># e.g., [&#39;.jinja2&#39;, &#39;.j2&#39;]</span>
+
+<div class="viewcode-block" id="TemplateEngine.parse_template">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.TemplateEngine.parse_template">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse template to extract structure.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_str: Template content</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict with keys:</span>
+<span class="sd">                - &#39;placeholders&#39;: list of parameter names</span>
+<span class="sd">                - &#39;defaults&#39;: dict of default values</span>
+<span class="sd">                - &#39;metadata&#39;: any engine-specific info</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="TemplateEngine.render">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.TemplateEngine.render">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Render template with provided values.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_str: Template content</span>
+<span class="sd">            **kwargs: Values to inject</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Rendered string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="TemplateEngine.detect">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.TemplateEngine.detect">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect if content uses this engine based on syntax.</span>
+
+<span class="sd">        Used when extension doesn&#39;t clearly indicate engine.</span>
+<span class="sd">        Override to provide content-based detection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            content: Template content</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if content appears to use this engine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># Default: rely on extension</span></div>
+</div>
+
+
+
+<span class="c1"># Global registry</span>
+<span class="n">_ENGINE_REGISTRY</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TemplateEngine</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="register_engine">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.register_engine">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="n">TemplateEngine</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Register a template engine.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        engine: TemplateEngine instance to register</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_ENGINE_REGISTRY</span><span class="p">[</span><span class="n">engine</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">engine</span></div>
+
+
+
+<div class="viewcode-block" id="get_engine">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.get_engine">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_engine</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TemplateEngine</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get engine by name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Engine name (e.g., &#39;format&#39;, &#39;jinja2&#39;)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateEngine instance or None if not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_ENGINE_REGISTRY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_engine_by_extension">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.get_engine_by_extension">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_engine_by_extension</span><span class="p">(</span><span class="n">extension</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TemplateEngine</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get engine that handles a given extension.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        extension: File extension (e.g., &#39;.jinja2&#39;)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateEngine instance or None if not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">_ENGINE_REGISTRY</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">engine</span><span class="o">.</span><span class="n">extensions</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">engine</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="detect_engine">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.detect_engine">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_engine</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TemplateEngine</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect appropriate engine for content.</span>
+
+<span class="sd">    Priority:</span>
+<span class="sd">    1. Extension match (if provided)</span>
+<span class="sd">    2. Content-based detection</span>
+<span class="sd">    3. Default (format)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        content: Template content</span>
+<span class="sd">        extension: Optional file extension</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TemplateEngine instance (never None, falls back to &#39;format&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check extension first</span>
+    <span class="k">if</span> <span class="n">extension</span><span class="p">:</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">get_engine_by_extension</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">engine</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">engine</span>
+
+    <span class="c1"># Try content detection</span>
+    <span class="k">for</span> <span class="n">engine</span> <span class="ow">in</span> <span class="n">_ENGINE_REGISTRY</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">engine</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">engine</span>
+
+    <span class="c1"># Default to format engine</span>
+    <span class="n">default_engine</span> <span class="o">=</span> <span class="n">get_engine</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">default_engine</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;No default &#39;format&#39; engine registered&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">default_engine</span></div>
+
+
+
+<div class="viewcode-block" id="list_engines">
+<a class="viewcode-back" href="../../module_docs/pyrompt/engines.html#pyrompt.list_engines">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_engines</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List all registered engine names.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of engine names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">_ENGINE_REGISTRY</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+
+<span class="c1"># Import and register built-in engines</span>
+<span class="c1"># These imports will auto-register the engines</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines.format_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FormatEngine</span>  <span class="c1"># noqa: E402</span>
+
+<span class="c1"># Optional engines (only register if dependencies are available)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines.jinja2_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Jinja2Engine</span>  <span class="c1"># noqa: F401, E402</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>  <span class="c1"># Jinja2 not available</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines.mustache_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">MustacheEngine</span>  <span class="c1"># noqa: F401, E402</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>  <span class="c1"># Pystache not available</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;TemplateEngine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;register_engine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_engine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_engine_by_extension&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;detect_engine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;list_engines&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

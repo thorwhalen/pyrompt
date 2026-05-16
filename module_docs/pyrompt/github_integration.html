@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.github_integration &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyrompt.mall" href="mall.html" />
+    <link rel="prev" title="pyrompt.engines.mustache_engine" href="engines/mustache_engine.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyrompt.github_integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.github_integration.GitHubPromptCollection"><code class="docutils literal notranslate"><span class="pre">GitHubPromptCollection</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.github_integration.GitHubPromptCollection.sync"><code class="docutils literal notranslate"><span class="pre">GitHubPromptCollection.sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.github_integration.clone_collection"><code class="docutils literal notranslate"><span class="pre">clone_collection()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.github_integration.discover_prompt_collections"><code class="docutils literal notranslate"><span class="pre">discover_prompt_collections()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.github_integration.fork_collection"><code class="docutils literal notranslate"><span class="pre">fork_collection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyrompt.github_integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/pyrompt/github_integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyrompt.github_integration">
+<span id="pyrompt-github-integration"></span><h1>pyrompt.github_integration<a class="headerlink" href="#module-pyrompt.github_integration" title="Link to this heading"></a></h1>
+<p>GitHub integration for sharing and discovering prompt collections.</p>
+<p>Enables:
+- Publishing collections to GitHub repositories
+- Discovering public collections
+- Syncing collections with GitHub</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.github_integration.GitHubPromptCollection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.github_integration.</span></span><span class="sig-name descname"><span class="pre">GitHubPromptCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_cache</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'prompts'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/github_integration.html#GitHubPromptCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.github_integration.GitHubPromptCollection" title="Link to this definition"></a></dt>
+<dd><p>Prompt collection backed by GitHub repository.</p>
+<p>Repositories must end with ‘_pyrompt’ suffix for discovery.
+Contains prompts/ and/or templates/ directories.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Publishing a collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gh</span> <span class="o">=</span> <span class="n">GitHubPromptCollection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">repo</span><span class="o">=</span><span class="s1">&#39;username/my_prompts_pyrompt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">token</span><span class="o">=</span><span class="s1">&#39;ghp_...&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gh</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gh</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>  <span class="c1"># Commits and pushes to GitHub</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.github_integration.GitHubPromptCollection.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Update</span> <span class="pre">prompts</span> <span class="pre">via</span> <span class="pre">pyrompt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/github_integration.html#GitHubPromptCollection.sync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.github_integration.GitHubPromptCollection.sync" title="Link to this definition"></a></dt>
+<dd><p>Push local changes to GitHub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – Commit message</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>PermissionError</strong> – If collection is readonly</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.github_integration.clone_collection">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.github_integration.</span></span><span class="sig-name descname"><span class="pre">clone_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/github_integration.html#clone_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.github_integration.clone_collection" title="Link to this definition"></a></dt>
+<dd><p>Clone a GitHub collection to local directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repo</strong> – Repository name (user/repo_pyrompt)</p></li>
+<li><p><strong>local_path</strong> – Local directory path</p></li>
+<li><p><strong>token</strong> – Optional GitHub token</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clone_collection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;thorwhalen/awesome_prompts_pyrompt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;/tmp/my_prompts&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.github_integration.discover_prompt_collections">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.github_integration.</span></span><span class="sig-name descname"><span class="pre">discover_prompt_collections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_term</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_stars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Python'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/pyrompt/github_integration.html#discover_prompt_collections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.github_integration.discover_prompt_collections" title="Link to this definition"></a></dt>
+<dd><p>Discover public <a href="#id1"><span class="problematic" id="id2">*</span></a>_pyrompt repositories on GitHub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_term</strong> – Search query (e.g., “python data”)</p></li>
+<li><p><strong>min_stars</strong> – Minimum star count</p></li>
+<li><p><strong>language</strong> – Programming language filter</p></li>
+<li><p><strong>max_results</strong> – Maximum number of results</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dicts with repo info (name, description, stars, url)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="n">discover_prompt_collections</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">search_term</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">min_stars</span><span class="o">=</span><span class="mi">5</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">repo</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;stars&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> stars&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.github_integration.fork_collection">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.github_integration.</span></span><span class="sig-name descname"><span class="pre">fork_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyrompt.github_integration.GitHubPromptCollection" title="pyrompt.github_integration.GitHubPromptCollection"><span class="pre">GitHubPromptCollection</span></a></span></span><a class="reference internal" href="../../_modules/pyrompt/github_integration.html#fork_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.github_integration.fork_collection" title="Link to this definition"></a></dt>
+<dd><p>Fork a collection to your account or organization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – Source repo (user/repo_pyrompt)</p></li>
+<li><p><strong>token</strong> – GitHub token with repo permissions</p></li>
+<li><p><strong>organization</strong> – Optional organization to fork to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>GitHubPromptCollection for the new fork</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">forked</span> <span class="o">=</span> <span class="n">fork_collection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;thorwhalen/awesome_prompts_pyrompt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">token</span><span class="o">=</span><span class="s1">&#39;ghp_...&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="engines/mustache_engine.html" class="btn btn-neutral float-left" title="pyrompt.engines.mustache_engine" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mall.html" class="btn btn-neutral float-right" title="pyrompt.mall" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

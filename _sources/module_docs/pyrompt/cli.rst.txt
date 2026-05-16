@@ -1,0 +1,4 @@
+pyrompt.cli
+===========
+.. automodule:: pyrompt.cli
+   :members:

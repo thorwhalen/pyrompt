@@ -1,0 +1,4 @@
+pyrompt.mall
+============
+.. automodule:: pyrompt.mall
+   :members:

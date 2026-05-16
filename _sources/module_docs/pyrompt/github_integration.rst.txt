@@ -1,0 +1,4 @@
+pyrompt.github_integration
+==========================
+.. automodule:: pyrompt.github_integration
+   :members:

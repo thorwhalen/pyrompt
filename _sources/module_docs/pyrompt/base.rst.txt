@@ -1,0 +1,4 @@
+pyrompt.base
+============
+.. automodule:: pyrompt.base
+   :members:

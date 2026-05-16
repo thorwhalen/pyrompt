@@ -1,0 +1,23 @@
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   module_docs/pyrompt
+   module_docs/pyrompt/base
+   module_docs/pyrompt/cli
+   module_docs/pyrompt/engines
+   module_docs/pyrompt/engines/format_engine
+   module_docs/pyrompt/engines/jinja2_engine
+   module_docs/pyrompt/engines/mustache_engine
+   module_docs/pyrompt/github_integration
+   module_docs/pyrompt/mall
+   module_docs/pyrompt/search
+   module_docs/pyrompt/stores
+   module_docs/pyrompt/tests
+   module_docs/pyrompt/tests/conftest
+   module_docs/pyrompt/tests/test_collections
+   module_docs/pyrompt/tests/test_engines
+   module_docs/pyrompt/tests/test_mall
+   module_docs/pyrompt/tests/test_search
+   module_docs/pyrompt/tests/test_stores
+   module_docs/pyrompt/util

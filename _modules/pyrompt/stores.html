@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.stores &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyrompt.stores</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyrompt.stores</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Storage layer for pyrompt using dol abstractions.</span>
+
+<span class="sd">Provides clean Mapping/MutableMapping interfaces to filesystem storage.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="n">Files</span><span class="p">,</span> <span class="n">TextFiles</span><span class="p">,</span> <span class="n">JsonFiles</span><span class="p">,</span> <span class="n">wrap_kvs</span><span class="p">,</span> <span class="n">filt_iter</span><span class="p">,</span> <span class="n">add_ipython_key_completions</span>
+
+
+<div class="viewcode-block" id="get_default_base_path">
+<a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.get_default_base_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_default_base_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get platform-appropriate base path for pyrompt data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - Windows: %LOCALAPPDATA%/pyrompt</span>
+<span class="sd">        - macOS/Linux: ~/.local/share/pyrompt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>  <span class="c1"># Windows</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;LOCALAPPDATA&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">base</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;pyrompt&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># macOS/Linux</span>
+        <span class="c1"># Check for XDG_DATA_HOME first</span>
+        <span class="n">xdg_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;XDG_DATA_HOME&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">xdg_data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xdg_data</span><span class="p">,</span> <span class="s1">&#39;pyrompt&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.local/share/pyrompt&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="mk_prompt_store">
+<a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_prompt_store">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_prompt_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a file store for prompts with clean interface.</span>
+
+<span class="sd">    - Keys don&#39;t show extension</span>
+<span class="sd">    - Values are strings (not bytes)</span>
+<span class="sd">    - Supports tab completion</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rootdir: Directory to store prompts</span>
+<span class="sd">        extension: File extension (without dot)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MutableMapping[str, str] with file-backed storage</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; store = mk_prompt_store(&#39;/tmp/prompts&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; store[&#39;greeting&#39;] = &quot;Hello, {name}!&quot;</span>
+<span class="sd">        &gt;&gt;&gt; print(store[&#39;greeting&#39;])</span>
+<span class="sd">        Hello, {name}!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure directory exists</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Start with text files</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">TextFiles</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Filter for specific extension</span>
+    <span class="n">ext_with_dot</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">filt_iter</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt_iter</span><span class="o">.</span><span class="n">suffixes</span><span class="p">(</span><span class="n">ext_with_dot</span><span class="p">))</span>
+
+    <span class="c1"># Hide extension from users</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="n">wrap_kvs</span><span class="p">(</span>
+        <span class="n">filtered</span><span class="p">,</span>
+        <span class="n">key_of_id</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ext_with_dot</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+        <span class="n">id_of_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">ext_with_dot</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Add tab completion support</span>
+    <span class="k">return</span> <span class="n">add_ipython_key_completions</span><span class="p">(</span><span class="n">store</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="mk_template_store">
+<a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_template_store">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_template_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extensions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a template store that handles multiple extensions.</span>
+
+<span class="sd">    Keeps the extension in the key so we can detect template engine.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rootdir: Directory to store templates</span>
+<span class="sd">        extensions: List of extensions to support (with dots)</span>
+<span class="sd">                   Defaults to [&#39;.txt&#39;, &#39;.jinja2&#39;, &#39;.j2&#39;, &#39;.jinja&#39;, &#39;.mustache&#39;, &#39;.hbs&#39;]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MutableMapping[str, str] with file-backed storage</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; store = mk_template_store(&#39;/tmp/templates&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; store[&#39;greeting.jinja2&#39;] = &quot;Hello {{ name }}!&quot;</span>
+<span class="sd">        &gt;&gt;&gt; store[&#39;simple.txt&#39;] = &quot;Hello {name}!&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure directory exists</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">extensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;.jinja2&#39;</span><span class="p">,</span> <span class="s1">&#39;.j2&#39;</span><span class="p">,</span> <span class="s1">&#39;.jinja&#39;</span><span class="p">,</span> <span class="s1">&#39;.mustache&#39;</span><span class="p">,</span> <span class="s1">&#39;.hbs&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Start with text files</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">TextFiles</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Filter for template extensions</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">filt_iter</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt_iter</span><span class="o">.</span><span class="n">suffixes</span><span class="p">(</span><span class="o">*</span><span class="n">extensions</span><span class="p">))</span>
+
+    <span class="c1"># Add tab completion (keep extensions visible)</span>
+    <span class="k">return</span> <span class="n">add_ipython_key_completions</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="mk_metadata_store">
+<a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_metadata_store">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_metadata_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">for_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;prompts&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a JSON metadata store.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rootdir: Directory to store metadata</span>
+<span class="sd">        for_type: Type of metadata (just for documentation)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MutableMapping[str, dict] with JSON file storage</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; store = mk_metadata_store(&#39;/tmp/meta&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; store[&#39;greeting&#39;] = {&#39;author&#39;: &#39;thor&#39;, &#39;version&#39;: &#39;1.0&#39;}</span>
+<span class="sd">        &gt;&gt;&gt; meta = store[&#39;greeting&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure directory exists</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># JsonFiles already handles JSON serialization</span>
+    <span class="k">return</span> <span class="n">JsonFiles</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="mk_collection_path">
+<a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_collection_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_collection_path</span><span class="p">(</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the path for a collection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        collection_name: Name of the collection</span>
+<span class="sd">        base_path: Optional base path (uses default if None)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Path object for the collection directory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">base_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="n">get_default_base_path</span><span class="p">()</span>
+
+    <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PYROMPT_DATA_DIR&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
+
+    <span class="n">collection_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;collections&#39;</span> <span class="o">/</span> <span class="n">collection_name</span>
+    <span class="k">return</span> <span class="n">collection_path</span></div>
+
+
+
+<span class="c1"># Utility function to create all stores for a collection</span>
+<div class="viewcode-block" id="mk_collection_stores">
+<a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_collection_stores">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_collection_stores</span><span class="p">(</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">create_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create all stores for a collection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        collection_name: Name of the collection</span>
+<span class="sd">        base_path: Optional base path</span>
+<span class="sd">        create_metadata: Whether to create metadata stores</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict with keys: &#39;prompts&#39;, &#39;templates&#39;, and optionally &#39;prompt_meta&#39;, &#39;template_meta&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">collection_path</span> <span class="o">=</span> <span class="n">mk_collection_path</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
+
+    <span class="n">stores</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;prompts&#39;</span><span class="p">:</span> <span class="n">mk_prompt_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;prompts&#39;</span><span class="p">)),</span>
+        <span class="s1">&#39;templates&#39;</span><span class="p">:</span> <span class="n">mk_template_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;templates&#39;</span><span class="p">)),</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">create_metadata</span><span class="p">:</span>
+        <span class="n">stores</span><span class="p">[</span><span class="s1">&#39;prompt_meta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;_prompt_meta&#39;</span><span class="p">),</span>
+            <span class="n">for_type</span><span class="o">=</span><span class="s1">&#39;prompts&#39;</span>
+        <span class="p">)</span>
+        <span class="n">stores</span><span class="p">[</span><span class="s1">&#39;template_meta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;_template_meta&#39;</span><span class="p">),</span>
+            <span class="n">for_type</span><span class="o">=</span><span class="s1">&#39;templates&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">stores</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

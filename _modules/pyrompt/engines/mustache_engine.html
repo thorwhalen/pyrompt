@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.engines.mustache_engine &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/pyrompt/util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../engines.html">pyrompt.engines</a></li>
+      <li class="breadcrumb-item active">pyrompt.engines.mustache_engine</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyrompt.engines.mustache_engine</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Mustache template engine.</span>
+
+<span class="sd">Logic-less templates with sections and partials.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateEngine</span><span class="p">,</span> <span class="n">register_engine</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pystache</span>
+    <span class="n">HAVE_PYSTACHE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAVE_PYSTACHE</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="MustacheEngine">
+<a class="viewcode-back" href="../../../module_docs/pyrompt/engines/mustache_engine.html#pyrompt.engines.mustache_engine.MustacheEngine">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MustacheEngine</span><span class="p">(</span><span class="n">TemplateEngine</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Mustache template engine.</span>
+
+<span class="sd">    Syntax: {{variable}}, {{#section}}, {{^inverted}}, {{!comment}}</span>
+<span class="sd">    Logic-less templating for cross-platform compatibility.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; # Requires pystache installed</span>
+<span class="sd">        &gt;&gt;&gt; engine = MustacheEngine()</span>
+<span class="sd">        &gt;&gt;&gt; template = &quot;Hello {{name}}!&quot;</span>
+<span class="sd">        &gt;&gt;&gt; engine.render(template, name=&quot;Alice&quot;)</span>
+<span class="sd">        &#39;Hello Alice!&#39;</span>
+<span class="sd">        &gt;&gt;&gt; template = &quot;{{#premium}}Thank you!{{/premium}}&quot;</span>
+<span class="sd">        &gt;&gt;&gt; engine.render(template, premium=True)</span>
+<span class="sd">        &#39;Thank you!&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;mustache&#39;</span>
+    <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.mustache&#39;</span><span class="p">,</span> <span class="s1">&#39;.hbs&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_PYSTACHE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;pystache not installed. Install with: pip install pystache&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">pystache</span><span class="o">.</span><span class="n">Renderer</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MustacheEngine.parse_template">
+<a class="viewcode-back" href="../../../module_docs/pyrompt/engines/mustache_engine.html#pyrompt.engines.mustache_engine.MustacheEngine.parse_template">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse Mustache template for variables.</span>
+
+<span class="sd">        Extracts variable names from {{var}} and {{#section}} tags.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_str: Template content</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict with &#39;placeholders&#39;, &#39;defaults&#39;, &#39;metadata&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">placeholders</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_vars</span><span class="p">(</span><span class="n">template_str</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;placeholders&#39;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">placeholders</span><span class="p">))),</span>  <span class="c1"># Unique, sorted</span>
+            <span class="s1">&#39;defaults&#39;</span><span class="p">:</span> <span class="p">{},</span>  <span class="c1"># Mustache uses empty string for missing</span>
+            <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;syntax&#39;</span><span class="p">:</span> <span class="s1">&#39;mustache&#39;</span><span class="p">}</span>
+        <span class="p">}</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract variable names from Mustache template.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_str: Template content</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of variable names</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">placeholders</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Pattern for {{variable}}</span>
+        <span class="n">var_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\{\{([^#^/!&gt;&amp;\{][^}]*)\}\}&#39;</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">var_pattern</span><span class="p">,</span> <span class="n">template_str</span><span class="p">)</span>
+        <span class="n">placeholders</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">)</span>
+
+        <span class="c1"># Pattern for {{#section}} and {{^inverted}}</span>
+        <span class="n">section_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\{\{[#^]([^}]+)\}\}&#39;</span>
+        <span class="n">sections</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">section_pattern</span><span class="p">,</span> <span class="n">template_str</span><span class="p">)</span>
+        <span class="n">placeholders</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">placeholders</span>
+
+<div class="viewcode-block" id="MustacheEngine.render">
+<a class="viewcode-back" href="../../../module_docs/pyrompt/engines/mustache_engine.html#pyrompt.engines.mustache_engine.MustacheEngine.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Render Mustache template.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_str: Template content</span>
+<span class="sd">            **kwargs: Values to inject</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Rendered string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template_str</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MustacheEngine.detect">
+<a class="viewcode-back" href="../../../module_docs/pyrompt/engines/mustache_engine.html#pyrompt.engines.mustache_engine.MustacheEngine.detect">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect Mustache by {{var}} without spaces.</span>
+
+<span class="sd">        Distinguishes from Jinja2 by lack of spaces: {{var}} vs {{ var }}.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            content: Template content</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if content appears to use Mustache syntax</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Look for {{something}} pattern</span>
+        <span class="c1"># Mustache typically has no spaces: {{name}}</span>
+        <span class="c1"># Jinja2 typically has spaces: {{ name }}</span>
+        <span class="k">if</span> <span class="s1">&#39;{{&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Check for Mustache-specific syntax</span>
+        <span class="n">mustache_patterns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">r</span><span class="s1">&#39;\{\{#&#39;</span><span class="p">,</span>  <span class="c1"># Sections: {{#section}}</span>
+            <span class="sa">r</span><span class="s1">&#39;\{\{\^&#39;</span><span class="p">,</span>  <span class="c1"># Inverted: {{^inverted}}</span>
+            <span class="sa">r</span><span class="s1">&#39;\{\{!&#39;</span><span class="p">,</span>  <span class="c1"># Comments: {{!comment}}</span>
+            <span class="sa">r</span><span class="s1">&#39;\{\{&gt;&#39;</span><span class="p">,</span>  <span class="c1"># Partials: {{&gt;partial}}</span>
+        <span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">mustache_patterns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># If no Mustache-specific patterns, check for tight braces (no spaces)</span>
+        <span class="c1"># This is a heuristic and not foolproof</span>
+        <span class="n">tight_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\{\{[^\s{]&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+        <span class="n">spaced_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\{\{\s&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tight_braces</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">spaced_braces</span></div>
+</div>
+
+
+
+<span class="c1"># Register if available</span>
+<span class="k">if</span> <span class="n">HAVE_PYSTACHE</span><span class="p">:</span>
+    <span class="n">register_engine</span><span class="p">(</span><span class="n">MustacheEngine</span><span class="p">())</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

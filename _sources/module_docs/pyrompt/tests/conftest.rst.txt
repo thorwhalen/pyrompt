@@ -1,0 +1,4 @@
+pyrompt.tests.conftest
+======================
+.. automodule:: pyrompt.tests.conftest
+   :members:

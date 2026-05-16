@@ -1,0 +1,4 @@
+pyrompt.stores
+==============
+.. automodule:: pyrompt.stores
+   :members:

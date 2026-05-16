@@ -1,0 +1,4 @@
+pyrompt
+=======
+.. automodule:: pyrompt
+   :members:

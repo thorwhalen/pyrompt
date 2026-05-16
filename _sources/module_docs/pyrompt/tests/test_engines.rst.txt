@@ -1,0 +1,4 @@
+pyrompt.tests.test_engines
+==========================
+.. automodule:: pyrompt.tests.test_engines
+   :members:

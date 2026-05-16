@@ -1,0 +1,1020 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyrompt.base" href="pyrompt/base.html" />
+    <link rel="prev" title="Welcome to pyrompt’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyrompt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.GitHubPromptCollection"><code class="docutils literal notranslate"><span class="pre">GitHubPromptCollection</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.GitHubPromptCollection.sync"><code class="docutils literal notranslate"><span class="pre">GitHubPromptCollection.sync()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.PromptCollection"><code class="docutils literal notranslate"><span class="pre">PromptCollection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.PromptMall"><code class="docutils literal notranslate"><span class="pre">PromptMall</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.add_collection"><code class="docutils literal notranslate"><span class="pre">PromptMall.add_collection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.get_collection_type"><code class="docutils literal notranslate"><span class="pre">PromptMall.get_collection_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.items"><code class="docutils literal notranslate"><span class="pre">PromptMall.items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.keys"><code class="docutils literal notranslate"><span class="pre">PromptMall.keys()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.remove_collection"><code class="docutils literal notranslate"><span class="pre">PromptMall.remove_collection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.search"><code class="docutils literal notranslate"><span class="pre">PromptMall.search()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.PromptMall.values"><code class="docutils literal notranslate"><span class="pre">PromptMall.values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.SemanticIndex"><code class="docutils literal notranslate"><span class="pre">SemanticIndex</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.SemanticIndex.add"><code class="docutils literal notranslate"><span class="pre">SemanticIndex.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.SemanticIndex.cluster"><code class="docutils literal notranslate"><span class="pre">SemanticIndex.cluster()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.SemanticIndex.rebuild"><code class="docutils literal notranslate"><span class="pre">SemanticIndex.rebuild()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.SemanticIndex.remove"><code class="docutils literal notranslate"><span class="pre">SemanticIndex.remove()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.SemanticIndex.search"><code class="docutils literal notranslate"><span class="pre">SemanticIndex.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.TemplateCollection"><code class="docutils literal notranslate"><span class="pre">TemplateCollection</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateCollection.create_prompt_functions"><code class="docutils literal notranslate"><span class="pre">TemplateCollection.create_prompt_functions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateCollection.parse"><code class="docutils literal notranslate"><span class="pre">TemplateCollection.parse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateCollection.render"><code class="docutils literal notranslate"><span class="pre">TemplateCollection.render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateCollection.to_prompt_function"><code class="docutils literal notranslate"><span class="pre">TemplateCollection.to_prompt_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateCollection.to_prompt_json_function"><code class="docutils literal notranslate"><span class="pre">TemplateCollection.to_prompt_json_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.TemplateEngine"><code class="docutils literal notranslate"><span class="pre">TemplateEngine</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateEngine.detect"><code class="docutils literal notranslate"><span class="pre">TemplateEngine.detect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateEngine.parse_template"><code class="docutils literal notranslate"><span class="pre">TemplateEngine.parse_template()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyrompt.TemplateEngine.render"><code class="docutils literal notranslate"><span class="pre">TemplateEngine.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.clone_collection"><code class="docutils literal notranslate"><span class="pre">clone_collection()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.create_project_structure"><code class="docutils literal notranslate"><span class="pre">create_project_structure()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.detect_engine"><code class="docutils literal notranslate"><span class="pre">detect_engine()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.discover_prompt_collections"><code class="docutils literal notranslate"><span class="pre">discover_prompt_collections()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.export_to_dict"><code class="docutils literal notranslate"><span class="pre">export_to_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.fork_collection"><code class="docutils literal notranslate"><span class="pre">fork_collection()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.get_default_base_path"><code class="docutils literal notranslate"><span class="pre">get_default_base_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.get_engine"><code class="docutils literal notranslate"><span class="pre">get_engine()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.get_stats"><code class="docutils literal notranslate"><span class="pre">get_stats()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.import_from_dict"><code class="docutils literal notranslate"><span class="pre">import_from_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.list_available_engines"><code class="docutils literal notranslate"><span class="pre">list_available_engines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.list_engines"><code class="docutils literal notranslate"><span class="pre">list_engines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.merge_collections"><code class="docutils literal notranslate"><span class="pre">merge_collections()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.quick_setup"><code class="docutils literal notranslate"><span class="pre">quick_setup()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.register_engine"><code class="docutils literal notranslate"><span class="pre">register_engine()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.render_template_file"><code class="docutils literal notranslate"><span class="pre">render_template_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyrompt.validate_template"><code class="docutils literal notranslate"><span class="pre">validate_template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyrompt/util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyrompt</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/module_docs/pyrompt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyrompt">
+<span id="pyrompt"></span><h1>pyrompt<a class="headerlink" href="#module-pyrompt" title="Link to this heading"></a></h1>
+<p>pyrompt: Python Prompt Management</p>
+<p>A flexible framework for managing, sharing, and searching prompts and prompt templates
+with support for multiple templating languages and idiomatic Python interfaces.</p>
+<dl>
+<dt>Quick Start:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptCollection</span><span class="p">,</span> <span class="n">TemplateCollection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful Python expert.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">))</span>
+<span class="go">Hello, Alice!</span>
+</pre></div>
+</div>
+</dd>
+<dt>Main Components:</dt><dd><ul class="simple">
+<li><p>PromptCollection: Store and manage prompts</p></li>
+<li><p>TemplateCollection: Store and manage templates with multi-engine support</p></li>
+<li><p>PromptMall: Collection of collections</p></li>
+<li><p>SemanticIndex: Semantic search over prompts</p></li>
+<li><p>GitHubPromptCollection: GitHub-backed collections</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.GitHubPromptCollection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">GitHubPromptCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_cache</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'prompts'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/github_integration.html#GitHubPromptCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.GitHubPromptCollection" title="Link to this definition"></a></dt>
+<dd><p>Prompt collection backed by GitHub repository.</p>
+<p>Repositories must end with ‘_pyrompt’ suffix for discovery.
+Contains prompts/ and/or templates/ directories.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Publishing a collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gh</span> <span class="o">=</span> <span class="n">GitHubPromptCollection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">repo</span><span class="o">=</span><span class="s1">&#39;username/my_prompts_pyrompt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">token</span><span class="o">=</span><span class="s1">&#39;ghp_...&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gh</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gh</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>  <span class="c1"># Commits and pushes to GitHub</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.GitHubPromptCollection.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Update</span> <span class="pre">prompts</span> <span class="pre">via</span> <span class="pre">pyrompt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/github_integration.html#GitHubPromptCollection.sync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.GitHubPromptCollection.sync" title="Link to this definition"></a></dt>
+<dd><p>Push local changes to GitHub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – Commit message</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>PermissionError</strong> – If collection is readonly</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.PromptCollection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">PromptCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_factory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/base.html#PromptCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptCollection" title="Link to this definition"></a></dt>
+<dd><p>Collection of prompts with MutableMapping interface.</p>
+<p>Backed by file storage via dol, with optional metadata.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful assistant.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">])</span>
+<span class="go">You are a helpful assistant.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">prompts</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.PromptMall">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">PromptMall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall" title="Link to this definition"></a></dt>
+<dd><p>Collection of collections - a “mall” of stores.</p>
+<p>Provides nested access: mall[‘collection_name’][‘prompt_key’]</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mall</span> <span class="o">=</span> <span class="n">PromptMall</span><span class="p">(</span><span class="s1">&#39;my_workspace&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mall</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">][</span><span class="s1">&#39;python_expert&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a Python expert.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mall</span><span class="p">[</span><span class="s1">&#39;templates&#39;</span><span class="p">][</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">mall</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">[&#39;system&#39;, &#39;templates&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">mall</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.add_collection">
+<span class="sig-name descname"><span class="pre">add_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'prompt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.add_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.add_collection" title="Link to this definition"></a></dt>
+<dd><p>Add a new collection to the mall.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Collection name</p></li>
+<li><p><strong>collection_type</strong> – ‘prompt’ or ‘template’</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mall</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="s1">&#39;personas&#39;</span><span class="p">,</span> <span class="s1">&#39;prompt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mall</span><span class="p">[</span><span class="s1">&#39;personas&#39;</span><span class="p">][</span><span class="s1">&#39;analyst&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a data analyst.&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.get_collection_type">
+<span class="sig-name descname"><span class="pre">get_collection_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.get_collection_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.get_collection_type" title="Link to this definition"></a></dt>
+<dd><p>Get the type of a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Collection name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘prompt’, ‘template’, or None if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.items" title="Link to this definition"></a></dt>
+<dd><p>Get (name, collection) pairs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.keys" title="Link to this definition"></a></dt>
+<dd><p>Get collection names.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.remove_collection">
+<span class="sig-name descname"><span class="pre">remove_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.remove_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.remove_collection" title="Link to this definition"></a></dt>
+<dd><p>Remove a collection from the mall.</p>
+<p>Note: This only removes it from the mall, not from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Collection name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">search_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.search" title="Link to this definition"></a></dt>
+<dd><p>Search across multiple collections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – Search query</p></li>
+<li><p><strong>collections</strong> – Collection names to search (None = all)</p></li>
+<li><p><strong>**search_kwargs</strong> – Additional args for SemanticIndex.search</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict mapping collection_name -&gt; search results</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">mall</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;python expert&#39;</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">coll_name</span><span class="p">,</span> <span class="n">matches</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">coll_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.PromptMall.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/mall.html#PromptMall.values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.PromptMall.values" title="Link to this definition"></a></dt>
+<dd><p>Get collections.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.SemanticIndex">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">SemanticIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_update</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'text-embedding-3-small'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/search.html#SemanticIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.SemanticIndex" title="Link to this definition"></a></dt>
+<dd><p>Semantic search index for prompts/templates.</p>
+<p>Uses oa.embeddings to create vector representations,
+then supports similarity search.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptCollection</span><span class="p">,</span> <span class="n">SemanticIndex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;python&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a Python expert.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You specialize in data analysis.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">SemanticIndex</span><span class="p">(</span><span class="n">prompts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;help with pandas&quot;</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.SemanticIndex.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/search.html#SemanticIndex.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.SemanticIndex.add" title="Link to this definition"></a></dt>
+<dd><p>Add single item to index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – Key of item to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.SemanticIndex.cluster">
+<span class="sig-name descname"><span class="pre">cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/search.html#SemanticIndex.cluster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.SemanticIndex.cluster" title="Link to this definition"></a></dt>
+<dd><p>Cluster prompts/templates into groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_clusters</strong> – Number of clusters</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict mapping cluster_id -&gt; list of keys</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ImportError</strong> – If scikit-learn not available</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.SemanticIndex.rebuild">
+<span class="sig-name descname"><span class="pre">rebuild</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/search.html#SemanticIndex.rebuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.SemanticIndex.rebuild" title="Link to this definition"></a></dt>
+<dd><p>Rebuild entire index from current collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.SemanticIndex.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/search.html#SemanticIndex.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.SemanticIndex.remove" title="Link to this definition"></a></dt>
+<dd><p>Remove item from index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – Key of item to remove</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.SemanticIndex.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diversity_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/search.html#SemanticIndex.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.SemanticIndex.search" title="Link to this definition"></a></dt>
+<dd><p>Search for similar prompts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – Search query text</p></li>
+<li><p><strong>top_k</strong> – Number of results to return</p></li>
+<li><p><strong>filters</strong> – Metadata filters (if collection has metadata)</p></li>
+<li><p><strong>diversity_threshold</strong> – If set, exclude results too similar to each other</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of (key, similarity_score) tuples, sorted by score descending</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;help with data analysis&quot;</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.TemplateCollection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">TemplateCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'format'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/base.html#TemplateCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateCollection" title="Link to this definition"></a></dt>
+<dd><p>Collection of templates with multi-engine support.</p>
+<p>Automatically detects template engine based on file extension
+or content. Provides rendering capabilities.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="go">&#39;Hello Alice!&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># With Jinja2 (if installed)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting.jinja2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello {{ name }}!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting.jinja2&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="go">&#39;Hello Bob!&#39;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateCollection.create_prompt_functions">
+<span class="sig-name descname"><span class="pre">create_prompt_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">common_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/base.html#TemplateCollection.create_prompt_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateCollection.create_prompt_functions" title="Link to this definition"></a></dt>
+<dd><p>Create PromptFuncs collection from templates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keys</strong> – Template keys to include (None = all)</p></li>
+<li><p><strong>**common_kwargs</strong> – Common kwargs for all prompt_functions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>PromptFuncs object with functions for each template</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">create_prompt_functions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">funcs</span><span class="o">.</span><span class="n">greeting</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateCollection.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/pyrompt/base.html#TemplateCollection.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateCollection.parse" title="Link to this definition"></a></dt>
+<dd><p>Parse a template to extract structure.</p>
+<p>Returns dict with placeholders, defaults, metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – Template key</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict with ‘placeholders’, ‘defaults’, ‘metadata’</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;greeting&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;placeholders&#39;</span><span class="p">]</span>
+<span class="go">[&#39;name&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateCollection.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pyrompt/base.html#TemplateCollection.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateCollection.render" title="Link to this definition"></a></dt>
+<dd><p>Render a template with provided values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – Template key</p></li>
+<li><p><strong>**kwargs</strong> – Values to inject</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered template string</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="go">&#39;Hello Alice!&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateCollection.to_prompt_function">
+<span class="sig-name descname"><span class="pre">to_prompt_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">prompt_func_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/base.html#TemplateCollection.to_prompt_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateCollection.to_prompt_function" title="Link to this definition"></a></dt>
+<dd><p>Convert template to an AI-enabled function using oa.prompt_function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – Template key</p></li>
+<li><p><strong>**prompt_func_kwargs</strong> – Additional kwargs for prompt_function
+(e.g., ‘system’, ‘model’, ‘temperature’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Callable function that invokes LLM with rendered template</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">oa</span><span class="w"> </span><span class="kn">import</span> <span class="n">prompt_function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;explain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Explain </span><span class="si">{concept}</span><span class="s2"> in simple terms.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">explain</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">to_prompt_function</span><span class="p">(</span><span class="s1">&#39;explain&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">explain</span><span class="p">(</span><span class="n">concept</span><span class="o">=</span><span class="s2">&quot;quantum computing&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateCollection.to_prompt_json_function">
+<span class="sig-name descname"><span class="pre">to_prompt_json_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">prompt_func_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/base.html#TemplateCollection.to_prompt_json_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateCollection.to_prompt_json_function" title="Link to this definition"></a></dt>
+<dd><p>Convert template to JSON-returning AI function.</p>
+<p>Uses oa.prompt_json_function to ensure structured output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – Template key</p></li>
+<li><p><strong>json_schema</strong> – JSON schema for output validation</p></li>
+<li><p><strong>**prompt_func_kwargs</strong> – Additional kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Function that returns parsed JSON dict</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;entities&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;people&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">}}</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;extract&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Extract people from: </span><span class="si">{text}</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extract</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">to_prompt_json_function</span><span class="p">(</span><span class="s1">&#39;extract&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Alice met Bob&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyrompt.TemplateEngine">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">TemplateEngine</span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#TemplateEngine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateEngine" title="Link to this definition"></a></dt>
+<dd><p>Abstract base class for template engines.</p>
+<p>Template engines parse and render templates with different syntaxes.
+They must provide:
+- name: Unique identifier (e.g., ‘format’, ‘jinja2’)
+- extensions: List of file extensions (e.g., [‘.jinja2’, ‘.j2’])
+- parse_template: Extract placeholders and defaults
+- render: Render template with values
+- detect: Optionally detect if content uses this engine</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateEngine.detect">
+<span class="sig-name descname"><span class="pre">detect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#TemplateEngine.detect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateEngine.detect" title="Link to this definition"></a></dt>
+<dd><p>Detect if content uses this engine based on syntax.</p>
+<p>Used when extension doesn’t clearly indicate engine.
+Override to provide content-based detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>content</strong> – Template content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if content appears to use this engine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateEngine.parse_template">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#TemplateEngine.parse_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateEngine.parse_template" title="Link to this definition"></a></dt>
+<dd><p>Parse template to extract structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>template_str</strong> – Template content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>‘placeholders’: list of parameter names</p></li>
+<li><p>’defaults’: dict of default values</p></li>
+<li><p>’metadata’: any engine-specific info</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict with keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyrompt.TemplateEngine.render">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#TemplateEngine.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.TemplateEngine.render" title="Link to this definition"></a></dt>
+<dd><p>Render template with provided values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_str</strong> – Template content</p></li>
+<li><p><strong>**kwargs</strong> – Values to inject</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.clone_collection">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">clone_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/github_integration.html#clone_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.clone_collection" title="Link to this definition"></a></dt>
+<dd><p>Clone a GitHub collection to local directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repo</strong> – Repository name (user/repo_pyrompt)</p></li>
+<li><p><strong>local_path</strong> – Local directory path</p></li>
+<li><p><strong>token</strong> – Optional GitHub token</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clone_collection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;thorwhalen/awesome_prompts_pyrompt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;/tmp/my_prompts&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.create_project_structure">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">create_project_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#create_project_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.create_project_structure" title="Link to this definition"></a></dt>
+<dd><p>Create a complete project structure for prompt management.</p>
+<p>Creates directories and example files for a new pyrompt project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_name</strong> – Name of the project</p></li>
+<li><p><strong>base_path</strong> – Optional base path</p></li>
+<li><p><strong>include_examples</strong> – Whether to include example prompts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path to created project directory</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">create_project_structure</span><span class="p">(</span><span class="s1">&#39;my_ai_app&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Project created at: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.detect_engine">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">detect_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyrompt/engines.html#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a></span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#detect_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.detect_engine" title="Link to this definition"></a></dt>
+<dd><p>Detect appropriate engine for content.</p>
+<p>Priority:
+1. Extension match (if provided)
+2. Content-based detection
+3. Default (format)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – Template content</p></li>
+<li><p><strong>extension</strong> – Optional file extension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TemplateEngine instance (never None, falls back to ‘format’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.discover_prompt_collections">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">discover_prompt_collections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_term</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_stars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Python'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/github_integration.html#discover_prompt_collections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.discover_prompt_collections" title="Link to this definition"></a></dt>
+<dd><p>Discover public <a href="#id1"><span class="problematic" id="id2">*</span></a>_pyrompt repositories on GitHub.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_term</strong> – Search query (e.g., “python data”)</p></li>
+<li><p><strong>min_stars</strong> – Minimum star count</p></li>
+<li><p><strong>language</strong> – Programming language filter</p></li>
+<li><p><strong>max_results</strong> – Maximum number of results</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dicts with repo info (name, description, stars, url)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="n">discover_prompt_collections</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">search_term</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">min_stars</span><span class="o">=</span><span class="mi">5</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">repo</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;stars&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> stars&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.export_to_dict">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">export_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#export_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.export_to_dict" title="Link to this definition"></a></dt>
+<dd><p>Export collection to a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> – PromptCollection or TemplateCollection</p></li>
+<li><p><strong>include_metadata</strong> – Whether to include metadata</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict with ‘prompts’ and optionally ‘metadata’ keys</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">export_to_dict</span><span class="p">(</span><span class="n">prompts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;prompts&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.fork_collection">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">fork_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyrompt/github_integration.html#pyrompt.github_integration.GitHubPromptCollection" title="pyrompt.github_integration.GitHubPromptCollection"><span class="pre">GitHubPromptCollection</span></a></span></span><a class="reference internal" href="../_modules/pyrompt/github_integration.html#fork_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.fork_collection" title="Link to this definition"></a></dt>
+<dd><p>Fork a collection to your account or organization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – Source repo (user/repo_pyrompt)</p></li>
+<li><p><strong>token</strong> – GitHub token with repo permissions</p></li>
+<li><p><strong>organization</strong> – Optional organization to fork to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>GitHubPromptCollection for the new fork</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">forked</span> <span class="o">=</span> <span class="n">fork_collection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;thorwhalen/awesome_prompts_pyrompt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">token</span><span class="o">=</span><span class="s1">&#39;ghp_...&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.get_default_base_path">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">get_default_base_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pyrompt/stores.html#get_default_base_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.get_default_base_path" title="Link to this definition"></a></dt>
+<dd><p>Get platform-appropriate base path for pyrompt data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>%LOCALAPPDATA%/pyrompt
+- macOS/Linux: ~/.local/share/pyrompt</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Windows</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.get_engine">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">get_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyrompt/engines.html#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#get_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.get_engine" title="Link to this definition"></a></dt>
+<dd><p>Get engine by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Engine name (e.g., ‘format’, ‘jinja2’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TemplateEngine instance or None if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.get_stats">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">get_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#get_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.get_stats" title="Link to this definition"></a></dt>
+<dd><p>Get statistics about a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>collection</strong> – PromptCollection or TemplateCollection</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict with statistics</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span> <span class="o">=</span> <span class="n">get_stats</span><span class="p">(</span><span class="n">prompts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;total_prompts&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.import_from_dict">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">import_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/util.html#import_from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.import_from_dict" title="Link to this definition"></a></dt>
+<dd><p>Import prompts from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> – PromptCollection or TemplateCollection</p></li>
+<li><p><strong>prompts</strong> – Dict mapping keys to prompt/template strings</p></li>
+<li><p><strong>metadata</strong> – Optional dict mapping keys to metadata dicts</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">import_from_dict</span><span class="p">(</span><span class="n">prompts</span><span class="p">,</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;system&#39;</span><span class="p">:</span> <span class="s1">&#39;You are helpful.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello!&#39;</span>
+<span class="gp">... </span><span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.list_available_engines">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">list_available_engines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#list_available_engines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.list_available_engines" title="Link to this definition"></a></dt>
+<dd><p>List all available template engines with their details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict mapping engine name to info dict</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">engines</span> <span class="o">=</span> <span class="n">list_available_engines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">engines</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">][</span><span class="s1">&#39;extensions&#39;</span><span class="p">])</span>
+<span class="go">[&#39;.txt&#39;, &#39;&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.list_engines">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">list_engines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/engines.html#list_engines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.list_engines" title="Link to this definition"></a></dt>
+<dd><p>List all registered engine names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of engine names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.merge_collections">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">merge_collections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conflict_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'skip'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/util.html#merge_collections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.merge_collections" title="Link to this definition"></a></dt>
+<dd><p>Merge multiple collections into a target collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> – Target collection to merge into</p></li>
+<li><p><strong>*sources</strong> – Source collections to merge from</p></li>
+<li><p><strong>conflict_strategy</strong> – How to handle conflicts (‘skip’, ‘overwrite’, ‘error’)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;merged&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source1</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;source1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source2</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;source2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_collections</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source1</span><span class="p">,</span> <span class="n">source2</span><span class="p">,</span> <span class="n">conflict_strategy</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.quick_setup">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">quick_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_templates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#quick_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.quick_setup" title="Link to this definition"></a></dt>
+<dd><p>Quick setup for a new pyrompt project.</p>
+<p>Creates both prompt and template collections with sensible defaults.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_name</strong> – Name of the project</p></li>
+<li><p><strong>with_templates</strong> – Whether to create a template collection</p></li>
+<li><p><strong>with_metadata</strong> – Whether to enable metadata</p></li>
+<li><p><strong>base_path</strong> – Optional base path</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict with ‘prompts’ and optionally ‘templates’ keys</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span> <span class="o">=</span> <span class="n">quick_setup</span><span class="p">(</span><span class="s1">&#39;my_ai_project&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span><span class="p">[</span><span class="s1">&#39;prompts&#39;</span><span class="p">][</span><span class="s1">&#39;system&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful assistant.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collections</span><span class="p">[</span><span class="s1">&#39;templates&#39;</span><span class="p">][</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.register_engine">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">register_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyrompt/engines.html#pyrompt.engines.TemplateEngine" title="pyrompt.engines.TemplateEngine"><span class="pre">TemplateEngine</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyrompt/engines.html#register_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.register_engine" title="Link to this definition"></a></dt>
+<dd><p>Register a template engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>engine</strong> – TemplateEngine instance to register</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.render_template_file">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">render_template_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#render_template_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.render_template_file" title="Link to this definition"></a></dt>
+<dd><p>Render a template file directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path to template file</p></li>
+<li><p><strong>output_path</strong> – Optional path to save rendered output</p></li>
+<li><p><strong>**kwargs</strong> – Template parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered string</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">render_template_file</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;templates/greeting.txt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyrompt.validate_template">
+<span class="sig-prename descclassname"><span class="pre">pyrompt.</span></span><span class="sig-name descname"><span class="pre">validate_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'format'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyrompt/util.html#validate_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.validate_template" title="Link to this definition"></a></dt>
+<dd><p>Validate a template string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_str</strong> – Template content</p></li>
+<li><p><strong>engine_name</strong> – Engine to use (‘format’, ‘jinja2’, ‘mustache’)</p></li>
+<li><p><strong>required_params</strong> – Optional list of required parameter names</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict with ‘valid’, ‘errors’, ‘warnings’, ‘placeholders’</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">validate_template</span><span class="p">(</span><span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="n">required_params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">validate_template</span><span class="p">(</span><span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="n">required_params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to pyrompt’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyrompt/base.html" class="btn btn-neutral float-right" title="pyrompt.base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

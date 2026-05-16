@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyrompt.github_integration &mdash; pyrompt 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyrompt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt.html">pyrompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/base.html">pyrompt.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/cli.html">pyrompt.cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines.html">pyrompt.engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/format_engine.html">pyrompt.engines.format_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/jinja2_engine.html">pyrompt.engines.jinja2_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/engines/mustache_engine.html">pyrompt.engines.mustache_engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/github_integration.html">pyrompt.github_integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/mall.html">pyrompt.mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/search.html">pyrompt.search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/stores.html">pyrompt.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests.html">pyrompt.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/conftest.html">pyrompt.tests.conftest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_collections.html">pyrompt.tests.test_collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_engines.html">pyrompt.tests.test_engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_mall.html">pyrompt.tests.test_mall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_search.html">pyrompt.tests.test_search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/tests/test_stores.html">pyrompt.tests.test_stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/pyrompt/util.html">pyrompt.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyrompt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyrompt.github_integration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyrompt.github_integration</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">GitHub integration for sharing and discovering prompt collections.</span>
+
+<span class="sd">Enables:</span>
+<span class="sd">- Publishing collections to GitHub repositories</span>
+<span class="sd">- Discovering public collections</span>
+<span class="sd">- Syncing collections with GitHub</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">MutableMapping</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">github</span><span class="w"> </span><span class="kn">import</span> <span class="n">Github</span><span class="p">,</span> <span class="n">GithubException</span>
+    <span class="n">HAVE_GITHUB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAVE_GITHUB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">git</span>
+    <span class="n">HAVE_GITPYTHON</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAVE_GITPYTHON</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="GitHubPromptCollection">
+<a class="viewcode-back" href="../../module_docs/pyrompt/github_integration.html#pyrompt.GitHubPromptCollection">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GitHubPromptCollection</span><span class="p">(</span><span class="n">MutableMapping</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prompt collection backed by GitHub repository.</span>
+
+<span class="sd">    Repositories must end with &#39;_pyrompt&#39; suffix for discovery.</span>
+<span class="sd">    Contains prompts/ and/or templates/ directories.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; # Publishing a collection</span>
+<span class="sd">        &gt;&gt;&gt; gh = GitHubPromptCollection(</span>
+<span class="sd">        ...     repo=&#39;username/my_prompts_pyrompt&#39;,</span>
+<span class="sd">        ...     token=&#39;ghp_...&#39;,</span>
+<span class="sd">        ...     readonly=False</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; gh[&#39;greeting&#39;] = &quot;Hello, {name}!&quot;</span>
+<span class="sd">        &gt;&gt;&gt; gh.sync()  # Commits and pushes to GitHub</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">readonly</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+        <span class="n">local_cache</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">collection_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;prompts&#39;</span>  <span class="c1"># &#39;prompts&#39; or &#39;templates&#39;</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create GitHub-backed collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            repo: Repository name (user/repo_name_pyrompt)</span>
+<span class="sd">            token: GitHub token (for write access)</span>
+<span class="sd">            readonly: Whether collection is read-only</span>
+<span class="sd">            branch: Branch to use</span>
+<span class="sd">            local_cache: Local cache directory</span>
+<span class="sd">            collection_type: &#39;prompts&#39; or &#39;templates&#39;</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ImportError: If PyGithub or GitPython not installed</span>
+<span class="sd">            ValueError: If repo doesn&#39;t end with &#39;_pyrompt&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_GITHUB</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;PyGithub required. Install with: pip install PyGithub&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_GITPYTHON</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;gitpython required. Install with: pip install gitpython&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">repo</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_pyrompt&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Repository must end with &#39;_pyrompt&#39;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">repo_name</span> <span class="o">=</span> <span class="n">repo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readonly</span> <span class="o">=</span> <span class="n">readonly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collection_type</span> <span class="o">=</span> <span class="n">collection_type</span>
+
+        <span class="c1"># Setup GitHub client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gh</span> <span class="o">=</span> <span class="n">Github</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="k">if</span> <span class="n">token</span> <span class="k">else</span> <span class="n">Github</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gh</span><span class="o">.</span><span class="n">get_repo</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">GithubException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not access repository </span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Local cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_cache</span> <span class="o">=</span> <span class="n">local_cache</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_cache_path</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_local_cache</span><span class="p">()</span>
+
+        <span class="c1"># Set up local store</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_prompt_store</span><span class="p">,</span> <span class="n">mk_template_store</span>
+        <span class="n">cache_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_cache</span><span class="p">)</span> <span class="o">/</span> <span class="n">collection_type</span>
+
+        <span class="k">if</span> <span class="n">collection_type</span> <span class="o">==</span> <span class="s1">&#39;prompts&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_store</span> <span class="o">=</span> <span class="n">mk_prompt_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cache_path</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_store</span> <span class="o">=</span> <span class="n">mk_template_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cache_path</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_default_cache_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get default cache path for this repo.&quot;&quot;&quot;</span>
+        <span class="n">cache_base</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s1">&#39;.cache&#39;</span> <span class="o">/</span> <span class="s1">&#39;pyrompt&#39;</span> <span class="o">/</span> <span class="s1">&#39;github&#39;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">cache_base</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_local_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clone or pull repo to local cache.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_cache</span><span class="p">):</span>
+            <span class="c1"># Clone repo</span>
+            <span class="n">git</span><span class="o">.</span><span class="n">Repo</span><span class="o">.</span><span class="n">clone_from</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;https://github.com/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">local_cache</span><span class="p">,</span>
+                <span class="n">branch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">branch</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Pull latest</span>
+            <span class="n">repo</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">Repo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_cache</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">repo</span><span class="o">.</span><span class="n">remotes</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>  <span class="c1"># Ignore pull errors (might have local changes)</span>
+
+<div class="viewcode-block" id="GitHubPromptCollection.sync">
+<a class="viewcode-back" href="../../module_docs/pyrompt/github_integration.html#pyrompt.GitHubPromptCollection.sync">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Update prompts via pyrompt&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Push local changes to GitHub.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message: Commit message</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PermissionError: If collection is readonly</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">PermissionError</span><span class="p">(</span><span class="s2">&quot;Collection is readonly&quot;</span><span class="p">)</span>
+
+        <span class="n">repo</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">Repo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_cache</span><span class="p">)</span>
+
+        <span class="c1"># Add all changes</span>
+        <span class="n">repo</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Commit if dirty</span>
+        <span class="k">if</span> <span class="n">repo</span><span class="o">.</span><span class="n">is_dirty</span><span class="p">()</span> <span class="ow">or</span> <span class="n">repo</span><span class="o">.</span><span class="n">untracked_files</span><span class="p">:</span>
+            <span class="n">repo</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+            <span class="c1"># Push</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">origin</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="s1">&#39;origin&#39;</span><span class="p">)</span>
+                <span class="n">origin</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to push to GitHub: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># MutableMapping interface</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">PermissionError</span><span class="p">(</span><span class="s2">&quot;Collection is readonly&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">PermissionError</span><span class="p">(</span><span class="s2">&quot;Collection is readonly&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span></div>
+
+
+
+<div class="viewcode-block" id="discover_prompt_collections">
+<a class="viewcode-back" href="../../module_docs/pyrompt/github_integration.html#pyrompt.discover_prompt_collections">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">discover_prompt_collections</span><span class="p">(</span>
+    <span class="n">search_term</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_stars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span>
+    <span class="n">max_results</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discover public *_pyrompt repositories on GitHub.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        search_term: Search query (e.g., &quot;python data&quot;)</span>
+<span class="sd">        min_stars: Minimum star count</span>
+<span class="sd">        language: Programming language filter</span>
+<span class="sd">        max_results: Maximum number of results</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of dicts with repo info (name, description, stars, url)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; collections = discover_prompt_collections(</span>
+<span class="sd">        ...     search_term=&#39;python&#39;,</span>
+<span class="sd">        ...     min_stars=5</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; for repo in collections:</span>
+<span class="sd">        ...     print(f&quot;{repo[&#39;name&#39;]}: {repo[&#39;stars&#39;]} stars&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_GITHUB</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;PyGithub required. Install with: pip install PyGithub&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">gh</span> <span class="o">=</span> <span class="n">Github</span><span class="p">()</span>
+
+    <span class="c1"># Build search query</span>
+    <span class="n">query_parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">search_term</span><span class="p">:</span>
+        <span class="n">query_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_term</span><span class="p">)</span>
+    <span class="n">query_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;_pyrompt in:name&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">language</span><span class="p">:</span>
+        <span class="n">query_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;language:</span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">min_stars</span><span class="p">:</span>
+        <span class="n">query_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;stars:&gt;=</span><span class="si">{</span><span class="n">min_stars</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">query_parts</span><span class="p">)</span>
+
+    <span class="c1"># Search</span>
+    <span class="n">repos</span> <span class="o">=</span> <span class="n">gh</span><span class="o">.</span><span class="n">search_repositories</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;stars&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Format results</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">repo</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">repos</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">max_results</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">repo</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">repo</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s1">&#39;stars&#39;</span><span class="p">:</span> <span class="n">repo</span><span class="o">.</span><span class="n">stargazers_count</span><span class="p">,</span>
+            <span class="s1">&#39;forks&#39;</span><span class="p">:</span> <span class="n">repo</span><span class="o">.</span><span class="n">forks_count</span><span class="p">,</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">repo</span><span class="o">.</span><span class="n">html_url</span><span class="p">,</span>
+            <span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="n">repo</span><span class="o">.</span><span class="n">updated_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="n">repo</span><span class="o">.</span><span class="n">updated_at</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+
+<div class="viewcode-block" id="fork_collection">
+<a class="viewcode-back" href="../../module_docs/pyrompt/github_integration.html#pyrompt.fork_collection">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fork_collection</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">organization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;GitHubPromptCollection&#39;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fork a collection to your account or organization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        source: Source repo (user/repo_pyrompt)</span>
+<span class="sd">        token: GitHub token with repo permissions</span>
+<span class="sd">        organization: Optional organization to fork to</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        GitHubPromptCollection for the new fork</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; forked = fork_collection(</span>
+<span class="sd">        ...     &#39;thorwhalen/awesome_prompts_pyrompt&#39;,</span>
+<span class="sd">        ...     token=&#39;ghp_...&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_GITHUB</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;PyGithub required. Install with: pip install PyGithub&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">gh</span> <span class="o">=</span> <span class="n">Github</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <span class="n">source_repo</span> <span class="o">=</span> <span class="n">gh</span><span class="o">.</span><span class="n">get_repo</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+
+    <span class="c1"># Create fork</span>
+    <span class="k">if</span> <span class="n">organization</span><span class="p">:</span>
+        <span class="n">fork</span> <span class="o">=</span> <span class="n">source_repo</span><span class="o">.</span><span class="n">create_fork</span><span class="p">(</span><span class="n">organization</span><span class="o">=</span><span class="n">organization</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fork</span> <span class="o">=</span> <span class="n">source_repo</span><span class="o">.</span><span class="n">create_fork</span><span class="p">()</span>
+
+    <span class="c1"># Return collection for fork</span>
+    <span class="k">return</span> <span class="n">GitHubPromptCollection</span><span class="p">(</span>
+        <span class="n">repo</span><span class="o">=</span><span class="n">fork</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span>
+        <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+        <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="clone_collection">
+<a class="viewcode-back" href="../../module_docs/pyrompt/github_integration.html#pyrompt.clone_collection">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">clone_collection</span><span class="p">(</span>
+    <span class="n">repo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">local_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clone a GitHub collection to local directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        repo: Repository name (user/repo_pyrompt)</span>
+<span class="sd">        local_path: Local directory path</span>
+<span class="sd">        token: Optional GitHub token</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; clone_collection(</span>
+<span class="sd">        ...     &#39;thorwhalen/awesome_prompts_pyrompt&#39;,</span>
+<span class="sd">        ...     &#39;/tmp/my_prompts&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_GITPYTHON</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;gitpython required. Install with: pip install gitpython&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://github.com/</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">token</span><span class="p">:</span>
+        <span class="c1"># Construct authenticated URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">@github.com/</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">git</span><span class="o">.</span><span class="n">Repo</span><span class="o">.</span><span class="n">clone_from</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">local_path</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
