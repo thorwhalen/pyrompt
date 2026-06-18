@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyrompt.stores &mdash; pyrompt 0.0.1 documentation</title>
+  <title>pyrompt.stores &mdash; pyrompt 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/documentation_options.js?v=282f96c0"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -102,7 +102,14 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="n">Files</span><span class="p">,</span> <span class="n">TextFiles</span><span class="p">,</span> <span class="n">JsonFiles</span><span class="p">,</span> <span class="n">wrap_kvs</span><span class="p">,</span> <span class="n">filt_iter</span><span class="p">,</span> <span class="n">add_ipython_key_completions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Files</span><span class="p">,</span>
+    <span class="n">TextFiles</span><span class="p">,</span>
+    <span class="n">JsonFiles</span><span class="p">,</span>
+    <span class="n">wrap_kvs</span><span class="p">,</span>
+    <span class="n">filt_iter</span><span class="p">,</span>
+    <span class="n">add_ipython_key_completions</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_default_base_path">
@@ -115,23 +122,23 @@
 <span class="sd">        - Windows: %LOCALAPPDATA%/pyrompt</span>
 <span class="sd">        - macOS/Linux: ~/.local/share/pyrompt</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>  <span class="c1"># Windows</span>
-        <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;LOCALAPPDATA&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;nt&quot;</span><span class="p">:</span>  <span class="c1"># Windows</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCALAPPDATA&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">base</span><span class="p">:</span>
-            <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;pyrompt&#39;</span><span class="p">)</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s2">&quot;pyrompt&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># macOS/Linux</span>
         <span class="c1"># Check for XDG_DATA_HOME first</span>
-        <span class="n">xdg_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;XDG_DATA_HOME&#39;</span><span class="p">)</span>
+        <span class="n">xdg_data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;XDG_DATA_HOME&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">xdg_data</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xdg_data</span><span class="p">,</span> <span class="s1">&#39;pyrompt&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.local/share/pyrompt&#39;</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xdg_data</span><span class="p">,</span> <span class="s2">&quot;pyrompt&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.local/share/pyrompt&quot;</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="mk_prompt_store">
 <a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_prompt_store">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">mk_prompt_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;txt&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_prompt_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;txt&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a file store for prompts with clean interface.</span>
 
@@ -158,15 +165,16 @@
     <span class="c1"># Start with text files</span>
     <span class="n">base</span> <span class="o">=</span> <span class="n">TextFiles</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="c1"># Filter for specific extension</span>
-    <span class="n">ext_with_dot</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s1">&#39;</span>
-    <span class="n">filtered</span> <span class="o">=</span> <span class="n">filt_iter</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt_iter</span><span class="o">.</span><span class="n">suffixes</span><span class="p">(</span><span class="n">ext_with_dot</span><span class="p">))</span>
+    <span class="c1"># Filter for specific extension. ``filt_iter.suffixes(...)`` is a store</span>
+    <span class="c1"># *decorator* (takes an iterable of suffixes), applied to the base store.</span>
+    <span class="n">ext_with_dot</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">filt_iter</span><span class="o">.</span><span class="n">suffixes</span><span class="p">([</span><span class="n">ext_with_dot</span><span class="p">])(</span><span class="n">base</span><span class="p">)</span>
 
     <span class="c1"># Hide extension from users</span>
     <span class="n">store</span> <span class="o">=</span> <span class="n">wrap_kvs</span><span class="p">(</span>
         <span class="n">filtered</span><span class="p">,</span>
-        <span class="n">key_of_id</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ext_with_dot</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
-        <span class="n">id_of_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">ext_with_dot</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">key_of_id</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ext_with_dot</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="n">id_of_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">ext_with_dot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Add tab completion support</span>
@@ -199,13 +207,14 @@
     <span class="n">Path</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">extensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;.jinja2&#39;</span><span class="p">,</span> <span class="s1">&#39;.j2&#39;</span><span class="p">,</span> <span class="s1">&#39;.jinja&#39;</span><span class="p">,</span> <span class="s1">&#39;.mustache&#39;</span><span class="p">,</span> <span class="s1">&#39;.hbs&#39;</span><span class="p">]</span>
+        <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;.jinja2&quot;</span><span class="p">,</span> <span class="s2">&quot;.j2&quot;</span><span class="p">,</span> <span class="s2">&quot;.jinja&quot;</span><span class="p">,</span> <span class="s2">&quot;.mustache&quot;</span><span class="p">,</span> <span class="s2">&quot;.hbs&quot;</span><span class="p">]</span>
 
     <span class="c1"># Start with text files</span>
     <span class="n">base</span> <span class="o">=</span> <span class="n">TextFiles</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="c1"># Filter for template extensions</span>
-    <span class="n">filtered</span> <span class="o">=</span> <span class="n">filt_iter</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt_iter</span><span class="o">.</span><span class="n">suffixes</span><span class="p">(</span><span class="o">*</span><span class="n">extensions</span><span class="p">))</span>
+    <span class="c1"># Filter for template extensions. ``filt_iter.suffixes(...)`` is a store</span>
+    <span class="c1"># *decorator* (takes an iterable of suffixes), applied to the base store.</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">filt_iter</span><span class="o">.</span><span class="n">suffixes</span><span class="p">(</span><span class="n">extensions</span><span class="p">)(</span><span class="n">base</span><span class="p">)</span>
 
     <span class="c1"># Add tab completion (keep extensions visible)</span>
     <span class="k">return</span> <span class="n">add_ipython_key_completions</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span></div>
@@ -214,7 +223,7 @@
 
 <div class="viewcode-block" id="mk_metadata_store">
 <a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_metadata_store">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">mk_metadata_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">for_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;prompts&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_metadata_store</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">for_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;prompts&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a JSON metadata store.</span>
 
@@ -240,10 +249,7 @@
 
 <div class="viewcode-block" id="mk_collection_path">
 <a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_collection_path">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">mk_collection_path</span><span class="p">(</span>
-    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_collection_path</span><span class="p">(</span><span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the path for a collection.</span>
 
@@ -257,9 +263,9 @@
     <span class="k">if</span> <span class="n">base_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">base_path</span> <span class="o">=</span> <span class="n">get_default_base_path</span><span class="p">()</span>
 
-    <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PYROMPT_DATA_DIR&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
+    <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PYROMPT_DATA_DIR&quot;</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
 
-    <span class="n">collection_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;collections&#39;</span> <span class="o">/</span> <span class="n">collection_name</span>
+    <span class="n">collection_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;collections&quot;</span> <span class="o">/</span> <span class="n">collection_name</span>
     <span class="k">return</span> <span class="n">collection_path</span></div>
 
 
@@ -268,9 +274,7 @@
 <div class="viewcode-block" id="mk_collection_stores">
 <a class="viewcode-back" href="../../module_docs/pyrompt/stores.html#pyrompt.mk_collection_stores">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mk_collection_stores</span><span class="p">(</span>
-    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">create_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">create_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create all stores for a collection.</span>
@@ -286,18 +290,16 @@
     <span class="n">collection_path</span> <span class="o">=</span> <span class="n">mk_collection_path</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
 
     <span class="n">stores</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;prompts&#39;</span><span class="p">:</span> <span class="n">mk_prompt_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;prompts&#39;</span><span class="p">)),</span>
-        <span class="s1">&#39;templates&#39;</span><span class="p">:</span> <span class="n">mk_template_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;templates&#39;</span><span class="p">)),</span>
+        <span class="s2">&quot;prompts&quot;</span><span class="p">:</span> <span class="n">mk_prompt_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s2">&quot;prompts&quot;</span><span class="p">)),</span>
+        <span class="s2">&quot;templates&quot;</span><span class="p">:</span> <span class="n">mk_template_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s2">&quot;templates&quot;</span><span class="p">)),</span>
     <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">create_metadata</span><span class="p">:</span>
-        <span class="n">stores</span><span class="p">[</span><span class="s1">&#39;prompt_meta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;_prompt_meta&#39;</span><span class="p">),</span>
-            <span class="n">for_type</span><span class="o">=</span><span class="s1">&#39;prompts&#39;</span>
+        <span class="n">stores</span><span class="p">[</span><span class="s2">&quot;prompt_meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s2">&quot;_prompt_meta&quot;</span><span class="p">),</span> <span class="n">for_type</span><span class="o">=</span><span class="s2">&quot;prompts&quot;</span>
         <span class="p">)</span>
-        <span class="n">stores</span><span class="p">[</span><span class="s1">&#39;template_meta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s1">&#39;_template_meta&#39;</span><span class="p">),</span>
-            <span class="n">for_type</span><span class="o">=</span><span class="s1">&#39;templates&#39;</span>
+        <span class="n">stores</span><span class="p">[</span><span class="s2">&quot;template_meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">collection_path</span> <span class="o">/</span> <span class="s2">&quot;_template_meta&quot;</span><span class="p">),</span> <span class="n">for_type</span><span class="o">=</span><span class="s2">&quot;templates&quot;</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">stores</span></div>
@@ -311,7 +313,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

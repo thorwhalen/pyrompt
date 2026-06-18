@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyrompt.util &mdash; pyrompt 0.0.1 documentation</title>
+  <title>pyrompt.util &mdash; pyrompt 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/documentation_options.js?v=282f96c0"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -107,7 +107,7 @@
     <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">with_templates</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">with_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Quick setup for a new pyrompt project.</span>
@@ -124,25 +124,24 @@
 <span class="sd">        Dict with &#39;prompts&#39; and optionally &#39;templates&#39; keys</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; collections = quick_setup(&#39;my_ai_project&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; collections = quick_setup(&#39;my_ai_project&#39;, base_path=tempfile.mkdtemp())</span>
 <span class="sd">        &gt;&gt;&gt; collections[&#39;prompts&#39;][&#39;system&#39;] = &quot;You are a helpful assistant.&quot;</span>
-<span class="sd">        &gt;&gt;&gt; collections[&#39;templates&#39;][&#39;greeting&#39;] = &quot;Hello {name}!&quot;</span>
+<span class="sd">        &gt;&gt;&gt; collections[&#39;templates&#39;][&#39;greeting.txt&#39;] = &quot;Hello {name}!&quot;</span>
+<span class="sd">        &gt;&gt;&gt; sorted(collections)</span>
+<span class="sd">        [&#39;prompts&#39;, &#39;templates&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptCollection</span><span class="p">,</span> <span class="n">TemplateCollection</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;prompts&#39;</span><span class="p">:</span> <span class="n">PromptCollection</span><span class="p">(</span>
-            <span class="n">project_name</span><span class="p">,</span>
-            <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span>
-            <span class="n">with_metadata</span><span class="o">=</span><span class="n">with_metadata</span>
+        <span class="s2">&quot;prompts&quot;</span><span class="p">:</span> <span class="n">PromptCollection</span><span class="p">(</span>
+            <span class="n">project_name</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span> <span class="n">with_metadata</span><span class="o">=</span><span class="n">with_metadata</span>
         <span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">with_templates</span><span class="p">:</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;templates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span>
-            <span class="n">project_name</span><span class="p">,</span>
-            <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span>
-            <span class="n">with_metadata</span><span class="o">=</span><span class="n">with_metadata</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;templates&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span>
+            <span class="n">project_name</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span> <span class="n">with_metadata</span><span class="o">=</span><span class="n">with_metadata</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
@@ -152,9 +151,7 @@
 <div class="viewcode-block" id="import_from_dict">
 <a class="viewcode-back" href="../../module_docs/pyrompt/util.html#pyrompt.import_from_dict">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">import_from_dict</span><span class="p">(</span>
-    <span class="n">collection</span><span class="p">,</span>
-    <span class="n">prompts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-    <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">collection</span><span class="p">,</span> <span class="n">prompts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import prompts from a dictionary.</span>
@@ -165,16 +162,17 @@
 <span class="sd">        metadata: Optional dict mapping keys to metadata dicts</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; import_from_dict(prompts, {</span>
-<span class="sd">        ...     &#39;system&#39;: &#39;You are helpful.&#39;,</span>
-<span class="sd">        ...     &#39;user&#39;: &#39;Hello!&#39;</span>
-<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; from pyrompt import PromptCollection</span>
+<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">        &gt;&gt;&gt; import_from_dict(prompts, {&#39;system&#39;: &#39;You are helpful.&#39;, &#39;user&#39;: &#39;Hello!&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; sorted(prompts)</span>
+<span class="sd">        [&#39;system&#39;, &#39;user&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">prompts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">collection</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
-    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s1">&#39;meta&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;meta&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">meta</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
                 <span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta</span></div>
@@ -183,10 +181,7 @@
 
 <div class="viewcode-block" id="export_to_dict">
 <a class="viewcode-back" href="../../module_docs/pyrompt/util.html#pyrompt.export_to_dict">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">export_to_dict</span><span class="p">(</span>
-    <span class="n">collection</span><span class="p">,</span>
-    <span class="n">include_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_to_dict</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">include_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Export collection to a dictionary.</span>
 
@@ -198,16 +193,17 @@
 <span class="sd">        Dict with &#39;prompts&#39; and optionally &#39;metadata&#39; keys</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; data = export_to_dict(prompts)</span>
-<span class="sd">        &gt;&gt;&gt; print(data[&#39;prompts&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; from pyrompt import PromptCollection</span>
+<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">        &gt;&gt;&gt; prompts[&#39;system&#39;] = &#39;You are helpful.&#39;</span>
+<span class="sd">        &gt;&gt;&gt; export_to_dict(prompts, include_metadata=False)</span>
+<span class="sd">        {&#39;prompts&#39;: {&#39;system&#39;: &#39;You are helpful.&#39;}}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;prompts&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">collection</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">}</span>
-    <span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prompts&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">collection</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">}}</span>
 
-    <span class="k">if</span> <span class="n">include_metadata</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s1">&#39;meta&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">include_metadata</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;meta&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">}</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
 
@@ -217,8 +213,8 @@
 <a class="viewcode-back" href="../../module_docs/pyrompt/util.html#pyrompt.validate_template">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_template</span><span class="p">(</span>
     <span class="n">template_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">engine_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;format&#39;</span><span class="p">,</span>
-    <span class="n">required_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">engine_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span>
+    <span class="n">required_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate a template string.</span>
@@ -239,39 +235,34 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_engine</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;valid&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;errors&#39;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s1">&#39;warnings&#39;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s1">&#39;placeholders&#39;</span><span class="p">:</span> <span class="p">[]</span>
-    <span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;valid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;warnings&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;placeholders&quot;</span><span class="p">:</span> <span class="p">[]}</span>
 
     <span class="c1"># Get engine</span>
     <span class="n">engine</span> <span class="o">=</span> <span class="n">get_engine</span><span class="p">(</span><span class="n">engine_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">engine</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Engine &#39;</span><span class="si">{</span><span class="n">engine_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Engine &#39;</span><span class="si">{</span><span class="n">engine_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="c1"># Try to parse</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">parsed</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">parse_template</span><span class="p">(</span><span class="n">template_str</span><span class="p">)</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;placeholders&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parsed</span><span class="p">[</span><span class="s1">&#39;placeholders&#39;</span><span class="p">]</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;placeholders&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;placeholders&quot;</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parse error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parse error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="c1"># Check required params</span>
     <span class="k">if</span> <span class="n">required_params</span><span class="p">:</span>
-        <span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">required_params</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;placeholders&#39;</span><span class="p">])</span>
+        <span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">required_params</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;placeholders&quot;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required parameters: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required parameters: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="n">extra</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;placeholders&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">required_params</span><span class="p">)</span>
+        <span class="n">extra</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;placeholders&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">required_params</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">extra</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;warnings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extra parameters not in required list: </span><span class="si">{</span><span class="n">extra</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;warnings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extra parameters not in required list: </span><span class="si">{</span><span class="n">extra</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
 
@@ -279,11 +270,7 @@
 
 <div class="viewcode-block" id="merge_collections">
 <a class="viewcode-back" href="../../module_docs/pyrompt/util.html#pyrompt.merge_collections">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">merge_collections</span><span class="p">(</span>
-    <span class="n">target</span><span class="p">,</span>
-    <span class="o">*</span><span class="n">sources</span><span class="p">,</span>
-    <span class="n">conflict_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;skip&#39;</span>
-<span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_collections</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="o">*</span><span class="n">sources</span><span class="p">,</span> <span class="n">conflict_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;skip&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Merge multiple collections into a target collection.</span>
 
@@ -293,17 +280,22 @@
 <span class="sd">        conflict_strategy: How to handle conflicts (&#39;skip&#39;, &#39;overwrite&#39;, &#39;error&#39;)</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; target = PromptCollection(&#39;merged&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; source1 = PromptCollection(&#39;source1&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; source2 = PromptCollection(&#39;source2&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; merge_collections(target, source1, source2, conflict_strategy=&#39;skip&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; from pyrompt import PromptCollection</span>
+<span class="sd">        &gt;&gt;&gt; base = tempfile.mkdtemp()</span>
+<span class="sd">        &gt;&gt;&gt; target = PromptCollection(&#39;merged&#39;, base_path=base)</span>
+<span class="sd">        &gt;&gt;&gt; source1 = PromptCollection(&#39;source1&#39;, base_path=base)</span>
+<span class="sd">        &gt;&gt;&gt; source1[&#39;a&#39;] = &#39;A&#39;</span>
+<span class="sd">        &gt;&gt;&gt; merge_collections(target, source1, conflict_strategy=&#39;skip&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; sorted(target)</span>
+<span class="sd">        [&#39;a&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">source</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">conflict_strategy</span> <span class="o">==</span> <span class="s1">&#39;skip&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">conflict_strategy</span> <span class="o">==</span> <span class="s2">&quot;skip&quot;</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="k">elif</span> <span class="n">conflict_strategy</span> <span class="o">==</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">conflict_strategy</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; already exists in target&quot;</span><span class="p">)</span>
                 <span class="c1"># else: overwrite</span>
             <span class="n">target</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
@@ -330,9 +322,9 @@
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">list_engines</span><span class="p">():</span>
         <span class="n">engine</span> <span class="o">=</span> <span class="n">get_engine</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">result</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">engine</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-            <span class="s1">&#39;extensions&#39;</span><span class="p">:</span> <span class="n">engine</span><span class="o">.</span><span class="n">extensions</span><span class="p">,</span>
-            <span class="s1">&#39;available&#39;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">engine</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;extensions&quot;</span><span class="p">:</span> <span class="n">engine</span><span class="o">.</span><span class="n">extensions</span><span class="p">,</span>
+            <span class="s2">&quot;available&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
@@ -342,9 +334,7 @@
 <div class="viewcode-block" id="render_template_file">
 <a class="viewcode-back" href="../../module_docs/pyrompt/util.html#pyrompt.render_template_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">render_template_file</span><span class="p">(</span>
-    <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">output_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">kwargs</span>
+    <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Render a template file directly.</span>
@@ -358,7 +348,7 @@
 <span class="sd">        Rendered string</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; result = render_template_file(</span>
+<span class="sd">        &gt;&gt;&gt; result = render_template_file(  # doctest: +SKIP</span>
 <span class="sd">        ...     &#39;templates/greeting.txt&#39;,</span>
 <span class="sd">        ...     name=&#39;Alice&#39;</span>
 <span class="sd">        ... )</span>
@@ -366,11 +356,11 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_engine</span>
 
     <span class="c1"># Read template</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">template_str</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="c1"># Detect engine by extension</span>
-    <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">file_path</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">file_path</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
     <span class="n">engine</span> <span class="o">=</span> <span class="n">detect_engine</span><span class="p">(</span><span class="n">template_str</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
 
     <span class="c1"># Render</span>
@@ -379,7 +369,7 @@
     <span class="c1"># Save if output_path provided</span>
     <span class="k">if</span> <span class="n">output_path</span><span class="p">:</span>
         <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
@@ -389,9 +379,7 @@
 <div class="viewcode-block" id="create_project_structure">
 <a class="viewcode-back" href="../../module_docs/pyrompt/util.html#pyrompt.create_project_structure">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_project_structure</span><span class="p">(</span>
-    <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">include_examples</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">include_examples</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a complete project structure for prompt management.</span>
@@ -407,30 +395,32 @@
 <span class="sd">        Path to created project directory</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; path = create_project_structure(&#39;my_ai_app&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Project created at: {path}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; path = create_project_structure(&#39;my_ai_app&#39;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Project created at: {path}&quot;)  # doctest: +SKIP</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptCollection</span><span class="p">,</span> <span class="n">TemplateCollection</span>
 
     <span class="c1"># Create collections</span>
     <span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="n">project_name</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span> <span class="n">with_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="n">project_name</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span> <span class="n">with_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span>
+        <span class="n">project_name</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">,</span> <span class="n">with_metadata</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">include_examples</span><span class="p">:</span>
         <span class="c1"># Add example prompts</span>
-        <span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;system_default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful AI assistant.&quot;</span>
-        <span class="n">prompts</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;system_default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;pyrompt&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Default system prompt&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">]</span>
+        <span class="n">prompts</span><span class="p">[</span><span class="s2">&quot;system_default&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful AI assistant.&quot;</span>
+        <span class="n">prompts</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;system_default&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;pyrompt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Default system prompt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">],</span>
         <span class="p">}</span>
 
         <span class="c1"># Add example templates</span>
-        <span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">, welcome to </span><span class="si">{project}</span><span class="s2">!&quot;</span>
-        <span class="n">templates</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;pyrompt&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Simple greeting template&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;project&#39;</span><span class="p">]</span>
+        <span class="n">templates</span><span class="p">[</span><span class="s2">&quot;greeting.txt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">, welcome to </span><span class="si">{project}</span><span class="s2">!&quot;</span>
+        <span class="n">templates</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;greeting.txt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;pyrompt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Simple greeting template&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;project&quot;</span><span class="p">],</span>
         <span class="p">}</span>
 
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">prompts</span><span class="o">.</span><span class="n">collection_dir</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span></div>
@@ -450,38 +440,42 @@
 <span class="sd">        Dict with statistics</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; stats = get_stats(prompts)</span>
-<span class="sd">        &gt;&gt;&gt; print(stats[&#39;total_prompts&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; from pyrompt import PromptCollection</span>
+<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">        &gt;&gt;&gt; get_stats(prompts)[&#39;total_prompts&#39;]</span>
+<span class="sd">        0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;total_prompts&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">),</span>
-        <span class="s1">&#39;has_metadata&#39;</span><span class="p">:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s1">&#39;meta&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s1">&#39;keys&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+        <span class="s2">&quot;total_prompts&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">),</span>
+        <span class="s2">&quot;has_metadata&quot;</span><span class="p">:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;meta&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">collection</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;keys&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;has_metadata&#39;</span><span class="p">]:</span>
-        <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;prompts_with_metadata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;has_metadata&quot;</span><span class="p">]:</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;prompts_with_metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">meta</span><span class="p">)</span>
 
     <span class="c1"># Calculate sizes</span>
     <span class="n">total_chars</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">)</span>
-    <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;total_characters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_chars</span>
-    <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;average_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_chars</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;total_characters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_chars</span>
+    <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;average_length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">total_chars</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">stats</span></div>
 
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;quick_setup&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;import_from_dict&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;export_to_dict&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;validate_template&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;merge_collections&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;list_available_engines&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;render_template_file&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;create_project_structure&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;get_stats&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;quick_setup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;import_from_dict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;export_to_dict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;validate_template&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;merge_collections&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;list_available_engines&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;render_template_file&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;create_project_structure&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_stats&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 
@@ -492,7 +486,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

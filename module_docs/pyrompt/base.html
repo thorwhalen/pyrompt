@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyrompt.base &mdash; pyrompt 0.0.1 documentation</title>
+  <title>pyrompt.base &mdash; pyrompt 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/documentation_options.js?v=282f96c0"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -115,7 +115,8 @@
 <dd><p>Collection of prompts with MutableMapping interface.</p>
 <p>Backed by file storage via dol, with optional metadata.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span> <span class="o">=</span> <span class="n">PromptCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful assistant.&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">prompts</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">])</span>
 <span class="go">You are a helpful assistant.</span>
@@ -132,7 +133,8 @@
 <p>Automatically detects template engine based on file extension
 or content. Provides rendering capabilities.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;my_project&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
 <span class="go">&#39;Hello Alice!&#39;</span>
@@ -145,21 +147,27 @@ or content. Provides rendering capabilities.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyrompt.base.TemplateCollection.create_prompt_functions">
 <span class="sig-name descname"><span class="pre">create_prompt_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">common_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/base.html#TemplateCollection.create_prompt_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.base.TemplateCollection.create_prompt_functions" title="Link to this definition"></a></dt>
-<dd><p>Create PromptFuncs collection from templates.</p>
+<dd><p>Create an <code class="docutils literal notranslate"><span class="pre">aix.PromptFuncs</span></code> collection from templates (one function per key).</p>
+<p>LLM generation routes through <code class="xref py py-mod docutils literal notranslate"><span class="pre">aix</span></code> (lazy import).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> – Template keys to include (None = all)</p></li>
-<li><p><strong>**common_kwargs</strong> – Common kwargs for all prompt_functions</p></li>
+<li><p><strong>**common_kwargs</strong> – Common kwargs for all prompt functions (e.g. ‘model’)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>PromptFuncs object with functions for each template</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">aix.PromptFuncs</span></code> object with a function for each template</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">create_prompt_functions</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">funcs</span><span class="o">.</span><span class="n">greeting</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateCollection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;demo&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Greet </span><span class="si">{name}</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_prompt_functions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">](</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="go">&#39;Hello Alice!&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -178,8 +186,10 @@ or content. Provides rendering capabilities.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;greeting&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;demo&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;placeholders&#39;</span><span class="p">]</span>
 <span class="go">[&#39;name&#39;]</span>
 </pre></div>
@@ -202,8 +212,10 @@ or content. Provides rendering capabilities.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;demo&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;greeting.txt&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
 <span class="go">&#39;Hello Alice!&#39;</span>
 </pre></div>
 </div>
@@ -212,24 +224,29 @@ or content. Provides rendering capabilities.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyrompt.base.TemplateCollection.to_prompt_function">
 <span class="sig-name descname"><span class="pre">to_prompt_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">prompt_func_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/base.html#TemplateCollection.to_prompt_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.base.TemplateCollection.to_prompt_function" title="Link to this definition"></a></dt>
-<dd><p>Convert template to an AI-enabled function using oa.prompt_function.</p>
+<dd><p>Convert template to an AI-enabled function using <code class="docutils literal notranslate"><span class="pre">aix.prompt_func</span></code>.</p>
+<p>LLM generation is routed through <code class="xref py py-mod docutils literal notranslate"><span class="pre">aix</span></code> (the multi-provider facade) so the
+model/provider is switchable. <code class="docutils literal notranslate"><span class="pre">aix</span></code> is imported lazily, only when called.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> – Template key</p></li>
-<li><p><strong>**prompt_func_kwargs</strong> – Additional kwargs for prompt_function
-(e.g., ‘system’, ‘model’, ‘temperature’)</p></li>
+<li><p><strong>**prompt_func_kwargs</strong> – Additional kwargs for <code class="docutils literal notranslate"><span class="pre">aix.prompt_func</span></code>
+(e.g., ‘model’, ‘temperature’, ‘name’)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Callable function that invokes LLM with rendered template</p>
+<dd class="field-even"><p>Callable function that invokes the LLM with the rendered template</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">oa</span><span class="w"> </span><span class="kn">import</span> <span class="n">prompt_function</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;explain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Explain </span><span class="si">{concept}</span><span class="s2"> in simple terms.&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">explain</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">to_prompt_function</span><span class="p">(</span><span class="s1">&#39;explain&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">explain</span><span class="p">(</span><span class="n">concept</span><span class="o">=</span><span class="s2">&quot;quantum computing&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateCollection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;demo&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;explain.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Explain </span><span class="si">{concept}</span><span class="s2"> in simple terms.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">explain</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">to_prompt_function</span><span class="p">(</span><span class="s1">&#39;explain.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">explain</span><span class="p">(</span><span class="n">concept</span><span class="o">=</span><span class="s2">&quot;quantum computing&quot;</span><span class="p">)</span>
+<span class="go">&#39;Quantum computing is ...&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -237,33 +254,31 @@ or content. Provides rendering capabilities.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyrompt.base.TemplateCollection.to_prompt_json_function">
 <span class="sig-name descname"><span class="pre">to_prompt_json_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">prompt_func_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyrompt/base.html#TemplateCollection.to_prompt_json_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyrompt.base.TemplateCollection.to_prompt_json_function" title="Link to this definition"></a></dt>
-<dd><p>Convert template to JSON-returning AI function.</p>
-<p>Uses oa.prompt_json_function to ensure structured output.</p>
+<dd><p>Convert template to a JSON-returning AI function.</p>
+<p>Uses <code class="docutils literal notranslate"><span class="pre">aix.prompt_func(output_schema=dict)</span></code>: aix requests JSON and parses it
+robustly (tolerating fenced output), returning a parsed dict. <code class="docutils literal notranslate"><span class="pre">json_schema</span></code> is
+accepted for API compatibility; aix does best-effort JSON rather than strict
+JSON-Schema enforcement. LLM generation routes through <code class="xref py py-mod docutils literal notranslate"><span class="pre">aix</span></code> (lazy import).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> – Template key</p></li>
-<li><p><strong>json_schema</strong> – JSON schema for output validation</p></li>
-<li><p><strong>**prompt_func_kwargs</strong> – Additional kwargs</p></li>
+<li><p><strong>json_schema</strong> – Desired JSON schema (kept for API compatibility)</p></li>
+<li><p><strong>**prompt_func_kwargs</strong> – Additional kwargs for <code class="docutils literal notranslate"><span class="pre">aix.prompt_func</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Function that returns parsed JSON dict</p>
+<dd class="field-even"><p>Function that returns a parsed JSON dict</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;entities&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;people&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">}}</span>
-<span class="gp">... </span>        <span class="p">}</span>
-<span class="gp">... </span>    <span class="p">}</span>
-<span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span><span class="p">[</span><span class="s1">&#39;extract&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Extract people from: </span><span class="si">{text}</span><span class="s2">&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">extract</span> <span class="o">=</span> <span class="n">templates</span><span class="o">.</span><span class="n">to_prompt_json_function</span><span class="p">(</span><span class="s1">&#39;extract&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Alice met Bob&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateCollection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">TemplateCollection</span><span class="p">(</span><span class="s1">&#39;demo&#39;</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;extract.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Extract people from: </span><span class="si">{text}</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extract</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">to_prompt_json_function</span><span class="p">(</span><span class="s1">&#39;extract.txt&#39;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extract</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Alice met Bob&quot;</span><span class="p">)</span>
+<span class="go">{&#39;people&#39;: [&#39;Alice&#39;, &#39;Bob&#39;]}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -283,7 +298,7 @@ or content. Provides rendering capabilities.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

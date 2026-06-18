@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyrompt.engines.mustache_engine &mdash; pyrompt 0.0.1 documentation</title>
+  <title>pyrompt.engines.mustache_engine &mdash; pyrompt 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../_static/documentation_options.js?v=282f96c0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -106,6 +106,7 @@
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pystache</span>
+
     <span class="n">HAVE_PYSTACHE</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">HAVE_PYSTACHE</span> <span class="o">=</span> <span class="kc">False</span>
@@ -122,17 +123,17 @@
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; # Requires pystache installed</span>
-<span class="sd">        &gt;&gt;&gt; engine = MustacheEngine()</span>
+<span class="sd">        &gt;&gt;&gt; engine = MustacheEngine()  # doctest: +SKIP</span>
 <span class="sd">        &gt;&gt;&gt; template = &quot;Hello {{name}}!&quot;</span>
-<span class="sd">        &gt;&gt;&gt; engine.render(template, name=&quot;Alice&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; engine.render(template, name=&quot;Alice&quot;)  # doctest: +SKIP</span>
 <span class="sd">        &#39;Hello Alice!&#39;</span>
 <span class="sd">        &gt;&gt;&gt; template = &quot;{{#premium}}Thank you!{{/premium}}&quot;</span>
-<span class="sd">        &gt;&gt;&gt; engine.render(template, premium=True)</span>
+<span class="sd">        &gt;&gt;&gt; engine.render(template, premium=True)  # doctest: +SKIP</span>
 <span class="sd">        &#39;Thank you!&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;mustache&#39;</span>
-    <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.mustache&#39;</span><span class="p">,</span> <span class="s1">&#39;.hbs&#39;</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;mustache&quot;</span>
+    <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.mustache&quot;</span><span class="p">,</span> <span class="s2">&quot;.hbs&quot;</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_PYSTACHE</span><span class="p">:</span>
@@ -158,9 +159,9 @@
         <span class="n">placeholders</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_vars</span><span class="p">(</span><span class="n">template_str</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;placeholders&#39;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">placeholders</span><span class="p">))),</span>  <span class="c1"># Unique, sorted</span>
-            <span class="s1">&#39;defaults&#39;</span><span class="p">:</span> <span class="p">{},</span>  <span class="c1"># Mustache uses empty string for missing</span>
-            <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;syntax&#39;</span><span class="p">:</span> <span class="s1">&#39;mustache&#39;</span><span class="p">}</span>
+            <span class="s2">&quot;placeholders&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">placeholders</span><span class="p">))),</span>  <span class="c1"># Unique, sorted</span>
+            <span class="s2">&quot;defaults&quot;</span><span class="p">:</span> <span class="p">{},</span>  <span class="c1"># Mustache uses empty string for missing</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;syntax&quot;</span><span class="p">:</span> <span class="s2">&quot;mustache&quot;</span><span class="p">},</span>
         <span class="p">}</span></div>
 
 
@@ -177,12 +178,12 @@
         <span class="n">placeholders</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># Pattern for {{variable}}</span>
-        <span class="n">var_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\{\{([^#^/!&gt;&amp;\{][^}]*)\}\}&#39;</span>
+        <span class="n">var_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\{\{([^#^/!&gt;&amp;\{][^}]*)\}\}&quot;</span>
         <span class="n">variables</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">var_pattern</span><span class="p">,</span> <span class="n">template_str</span><span class="p">)</span>
         <span class="n">placeholders</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">)</span>
 
         <span class="c1"># Pattern for {{#section}} and {{^inverted}}</span>
-        <span class="n">section_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\{\{[#^]([^}]+)\}\}&#39;</span>
+        <span class="n">section_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\{\{[#^]([^}]+)\}\}&quot;</span>
         <span class="n">sections</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">section_pattern</span><span class="p">,</span> <span class="n">template_str</span><span class="p">)</span>
         <span class="n">placeholders</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">)</span>
 
@@ -221,15 +222,15 @@
         <span class="c1"># Look for {{something}} pattern</span>
         <span class="c1"># Mustache typically has no spaces: {{name}}</span>
         <span class="c1"># Jinja2 typically has spaces: {{ name }}</span>
-        <span class="k">if</span> <span class="s1">&#39;{{&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;{{&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># Check for Mustache-specific syntax</span>
         <span class="n">mustache_patterns</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="sa">r</span><span class="s1">&#39;\{\{#&#39;</span><span class="p">,</span>  <span class="c1"># Sections: {{#section}}</span>
-            <span class="sa">r</span><span class="s1">&#39;\{\{\^&#39;</span><span class="p">,</span>  <span class="c1"># Inverted: {{^inverted}}</span>
-            <span class="sa">r</span><span class="s1">&#39;\{\{!&#39;</span><span class="p">,</span>  <span class="c1"># Comments: {{!comment}}</span>
-            <span class="sa">r</span><span class="s1">&#39;\{\{&gt;&#39;</span><span class="p">,</span>  <span class="c1"># Partials: {{&gt;partial}}</span>
+            <span class="sa">r</span><span class="s2">&quot;\{\{#&quot;</span><span class="p">,</span>  <span class="c1"># Sections: {{#section}}</span>
+            <span class="sa">r</span><span class="s2">&quot;\{\{\^&quot;</span><span class="p">,</span>  <span class="c1"># Inverted: {{^inverted}}</span>
+            <span class="sa">r</span><span class="s2">&quot;\{\{!&quot;</span><span class="p">,</span>  <span class="c1"># Comments: {{!comment}}</span>
+            <span class="sa">r</span><span class="s2">&quot;\{\{&gt;&quot;</span><span class="p">,</span>  <span class="c1"># Partials: {{&gt;partial}}</span>
         <span class="p">]</span>
 
         <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">mustache_patterns</span><span class="p">:</span>
@@ -238,8 +239,8 @@
 
         <span class="c1"># If no Mustache-specific patterns, check for tight braces (no spaces)</span>
         <span class="c1"># This is a heuristic and not foolproof</span>
-        <span class="n">tight_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\{\{[^\s{]&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
-        <span class="n">spaced_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\{\{\s&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+        <span class="n">tight_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{\{[^\s{]&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+        <span class="n">spaced_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{\{\s&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">tight_braces</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">spaced_braces</span></div>
 </div>
@@ -258,7 +259,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

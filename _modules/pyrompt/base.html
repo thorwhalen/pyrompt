@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyrompt.base &mdash; pyrompt 0.0.1 documentation</title>
+  <title>pyrompt.base &mdash; pyrompt 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/documentation_options.js?v=282f96c0"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -109,7 +109,31 @@
     <span class="n">mk_collection_path</span><span class="p">,</span>
     <span class="n">get_default_base_path</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_engine</span><span class="p">,</span> <span class="n">get_engine</span><span class="p">,</span> <span class="n">get_engine_by_extension</span><span class="p">,</span> <span class="n">TemplateEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrompt.engines</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">detect_engine</span><span class="p">,</span>
+    <span class="n">get_engine</span><span class="p">,</span>
+    <span class="n">get_engine_by_extension</span><span class="p">,</span>
+    <span class="n">TemplateEngine</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_apply_defaults</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">defaults</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrap an ``aix`` prompt-function so the template&#39;s parsed defaults are applied.</span>
+
+<span class="sd">    ``aix.prompt_func`` extracts ``{var:default}`` defaults from the template itself,</span>
+<span class="sd">    but this also carries defaults surfaced by non-format engines (e.g. Jinja), so</span>
+<span class="sd">    behaviour matches the old ``oa.prompt_function(defaults=...)`` regardless of engine.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">defaults</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fn</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="o">**</span><span class="n">defaults</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">with_defaults</span>
 
 
 <div class="viewcode-block" id="PromptCollection">
@@ -121,7 +145,8 @@
 <span class="sd">    Backed by file storage via dol, with optional metadata.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; prompts = PromptCollection(&#39;my_project&#39;, base_path=tempfile.mkdtemp())</span>
 <span class="sd">        &gt;&gt;&gt; prompts[&#39;system&#39;] = &quot;You are a helpful assistant.&quot;</span>
 <span class="sd">        &gt;&gt;&gt; print(prompts[&#39;system&#39;])</span>
 <span class="sd">        You are a helpful assistant.</span>
@@ -135,7 +160,7 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">with_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">store_factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">store_factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create or open a prompt collection.</span>
@@ -157,14 +182,14 @@
         <span class="k">if</span> <span class="n">store_factory</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_store</span> <span class="o">=</span> <span class="n">store_factory</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">prompts_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s1">&#39;prompts&#39;</span>
+            <span class="n">prompts_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s2">&quot;prompts&quot;</span>
             <span class="n">prompts_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_store</span> <span class="o">=</span> <span class="n">mk_prompt_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">prompts_dir</span><span class="p">))</span>
 
         <span class="c1"># Optional metadata store</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">with_metadata</span><span class="p">:</span>
-            <span class="n">meta_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s1">&#39;_prompt_meta&#39;</span>
+            <span class="n">meta_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s2">&quot;_prompt_meta&quot;</span>
             <span class="n">meta_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">meta_dir</span><span class="p">))</span>
 
@@ -205,13 +230,14 @@
 <span class="sd">    or content. Provides rendering capabilities.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; templates = TemplateCollection(&#39;my_project&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; templates = TemplateCollection(&#39;my_project&#39;, base_path=tempfile.mkdtemp())</span>
 <span class="sd">        &gt;&gt;&gt; templates[&#39;greeting.txt&#39;] = &quot;Hello {name}!&quot;</span>
 <span class="sd">        &gt;&gt;&gt; templates.render(&#39;greeting.txt&#39;, name=&#39;Alice&#39;)</span>
 <span class="sd">        &#39;Hello Alice!&#39;</span>
 <span class="sd">        &gt;&gt;&gt; # With Jinja2 (if installed)</span>
 <span class="sd">        &gt;&gt;&gt; templates[&#39;greeting.jinja2&#39;] = &quot;Hello {{ name }}!&quot;</span>
-<span class="sd">        &gt;&gt;&gt; templates.render(&#39;greeting.jinja2&#39;, name=&#39;Bob&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; templates.render(&#39;greeting.jinja2&#39;, name=&#39;Bob&#39;)  # doctest: +SKIP</span>
 <span class="sd">        &#39;Hello Bob!&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -221,7 +247,7 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">base_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">with_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">default_engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;format&#39;</span>
+        <span class="n">default_engine</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create or open a template collection.</span>
@@ -238,7 +264,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">default_engine</span> <span class="o">=</span> <span class="n">default_engine</span>
 
         <span class="c1"># Create template directory</span>
-        <span class="n">templates_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s1">&#39;templates&#39;</span>
+        <span class="n">templates_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s2">&quot;templates&quot;</span>
         <span class="n">templates_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># Store accepts any extension - we handle detection</span>
@@ -247,7 +273,7 @@
         <span class="c1"># Metadata</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">with_metadata</span><span class="p">:</span>
-            <span class="n">meta_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s1">&#39;_template_meta&#39;</span>
+            <span class="n">meta_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_dir</span> <span class="o">/</span> <span class="s2">&quot;_template_meta&quot;</span>
             <span class="n">meta_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="n">mk_metadata_store</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">meta_dir</span><span class="p">))</span>
 
@@ -262,17 +288,17 @@
 <span class="sd">            TemplateEngine instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Extract extension(s) from key</span>
-        <span class="n">parts</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># Try longest extension first (e.g., .jinja2.txt -&gt; .jinja2)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">ext</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+                <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:])</span>
                 <span class="n">engine</span> <span class="o">=</span> <span class="n">get_engine_by_extension</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">engine</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">engine</span>
 
                 <span class="c1"># Also try individual extensions</span>
-                <span class="n">single_ext</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">parts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">single_ext</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">parts</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
                 <span class="n">engine</span> <span class="o">=</span> <span class="n">get_engine_by_extension</span><span class="p">(</span><span class="n">single_ext</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">engine</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">engine</span>
@@ -302,8 +328,10 @@
 <span class="sd">            Rendered template string</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; templates[&#39;greeting&#39;] = &quot;Hello {name}!&quot;</span>
-<span class="sd">            &gt;&gt;&gt; templates.render(&#39;greeting&#39;, name=&#39;Alice&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; import tempfile</span>
+<span class="sd">            &gt;&gt;&gt; templates = TemplateCollection(&#39;demo&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">            &gt;&gt;&gt; templates[&#39;greeting.txt&#39;] = &quot;Hello {name}!&quot;</span>
+<span class="sd">            &gt;&gt;&gt; templates.render(&#39;greeting.txt&#39;, name=&#39;Alice&#39;)</span>
 <span class="sd">            &#39;Hello Alice!&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">template_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
@@ -326,8 +354,10 @@
 <span class="sd">            Dict with &#39;placeholders&#39;, &#39;defaults&#39;, &#39;metadata&#39;</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; templates[&#39;greeting&#39;] = &quot;Hello {name}!&quot;</span>
-<span class="sd">            &gt;&gt;&gt; info = templates.parse(&#39;greeting&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; import tempfile</span>
+<span class="sd">            &gt;&gt;&gt; templates = TemplateCollection(&#39;demo&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">            &gt;&gt;&gt; templates[&#39;greeting.txt&#39;] = &quot;Hello {name}!&quot;</span>
+<span class="sd">            &gt;&gt;&gt; info = templates.parse(&#39;greeting.txt&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; info[&#39;placeholders&#39;]</span>
 <span class="sd">            [&#39;name&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -340,129 +370,120 @@
 <a class="viewcode-back" href="../../module_docs/pyrompt/base.html#pyrompt.TemplateCollection.to_prompt_function">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_prompt_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">prompt_func_kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert template to an AI-enabled function using oa.prompt_function.</span>
+<span class="sd">        Convert template to an AI-enabled function using ``aix.prompt_func``.</span>
+
+<span class="sd">        LLM generation is routed through :mod:`aix` (the multi-provider facade) so the</span>
+<span class="sd">        model/provider is switchable. ``aix`` is imported lazily, only when called.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key: Template key</span>
-<span class="sd">            **prompt_func_kwargs: Additional kwargs for prompt_function</span>
-<span class="sd">                (e.g., &#39;system&#39;, &#39;model&#39;, &#39;temperature&#39;)</span>
+<span class="sd">            **prompt_func_kwargs: Additional kwargs for ``aix.prompt_func``</span>
+<span class="sd">                (e.g., &#39;model&#39;, &#39;temperature&#39;, &#39;name&#39;)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Callable function that invokes LLM with rendered template</span>
+<span class="sd">            Callable function that invokes the LLM with the rendered template</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; from oa import prompt_function</span>
-<span class="sd">            &gt;&gt;&gt; templates[&#39;explain&#39;] = &quot;Explain {concept} in simple terms.&quot;</span>
-<span class="sd">            &gt;&gt;&gt; explain = templates.to_prompt_function(&#39;explain&#39;)</span>
-<span class="sd">            &gt;&gt;&gt; result = explain(concept=&quot;quantum computing&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; import tempfile</span>
+<span class="sd">            &gt;&gt;&gt; from pyrompt import TemplateCollection</span>
+<span class="sd">            &gt;&gt;&gt; tc = TemplateCollection(&#39;demo&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">            &gt;&gt;&gt; tc[&#39;explain.txt&#39;] = &quot;Explain {concept} in simple terms.&quot;</span>
+<span class="sd">            &gt;&gt;&gt; explain = tc.to_prompt_function(&#39;explain.txt&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; explain(concept=&quot;quantum computing&quot;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;Quantum computing is ...&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">oa</span><span class="w"> </span><span class="kn">import</span> <span class="n">prompt_function</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">aix</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="s2">&quot;oa not installed. Install with: pip install oa&quot;</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;aix not installed. Install with: pip install aix&quot;</span><span class="p">)</span>
 
         <span class="n">template_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-        <span class="n">parse_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">defaults</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;defaults&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
-        <span class="k">return</span> <span class="n">prompt_function</span><span class="p">(</span>
-            <span class="n">template_str</span><span class="p">,</span>
-            <span class="n">defaults</span><span class="o">=</span><span class="n">parse_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">,</span> <span class="p">{}),</span>
-            <span class="o">**</span><span class="n">prompt_func_kwargs</span>
-        <span class="p">)</span></div>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">aix</span><span class="o">.</span><span class="n">prompt_func</span><span class="p">(</span><span class="n">template_str</span><span class="p">,</span> <span class="o">**</span><span class="n">prompt_func_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_apply_defaults</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="TemplateCollection.to_prompt_json_function">
 <a class="viewcode-back" href="../../module_docs/pyrompt/base.html#pyrompt.TemplateCollection.to_prompt_json_function">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_prompt_json_function</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">json_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">prompt_func_kwargs</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">json_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="o">**</span><span class="n">prompt_func_kwargs</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert template to JSON-returning AI function.</span>
+<span class="sd">        Convert template to a JSON-returning AI function.</span>
 
-<span class="sd">        Uses oa.prompt_json_function to ensure structured output.</span>
+<span class="sd">        Uses ``aix.prompt_func(output_schema=dict)``: aix requests JSON and parses it</span>
+<span class="sd">        robustly (tolerating fenced output), returning a parsed dict. ``json_schema`` is</span>
+<span class="sd">        accepted for API compatibility; aix does best-effort JSON rather than strict</span>
+<span class="sd">        JSON-Schema enforcement. LLM generation routes through :mod:`aix` (lazy import).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key: Template key</span>
-<span class="sd">            json_schema: JSON schema for output validation</span>
-<span class="sd">            **prompt_func_kwargs: Additional kwargs</span>
+<span class="sd">            json_schema: Desired JSON schema (kept for API compatibility)</span>
+<span class="sd">            **prompt_func_kwargs: Additional kwargs for ``aix.prompt_func``</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Function that returns parsed JSON dict</span>
+<span class="sd">            Function that returns a parsed JSON dict</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; schema = {</span>
-<span class="sd">            ...     &quot;name&quot;: &quot;entities&quot;,</span>
-<span class="sd">            ...     &quot;schema&quot;: {</span>
-<span class="sd">            ...         &quot;type&quot;: &quot;object&quot;,</span>
-<span class="sd">            ...         &quot;properties&quot;: {</span>
-<span class="sd">            ...             &quot;people&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;string&quot;}}</span>
-<span class="sd">            ...         }</span>
-<span class="sd">            ...     }</span>
-<span class="sd">            ... }</span>
-<span class="sd">            &gt;&gt;&gt; templates[&#39;extract&#39;] = &quot;Extract people from: {text}&quot;</span>
-<span class="sd">            &gt;&gt;&gt; extract = templates.to_prompt_json_function(&#39;extract&#39;, schema)</span>
-<span class="sd">            &gt;&gt;&gt; result = extract(text=&quot;Alice met Bob&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; import tempfile</span>
+<span class="sd">            &gt;&gt;&gt; from pyrompt import TemplateCollection</span>
+<span class="sd">            &gt;&gt;&gt; tc = TemplateCollection(&#39;demo&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">            &gt;&gt;&gt; tc[&#39;extract.txt&#39;] = &quot;Extract people from: {text}&quot;</span>
+<span class="sd">            &gt;&gt;&gt; extract = tc.to_prompt_json_function(&#39;extract.txt&#39;, {})</span>
+<span class="sd">            &gt;&gt;&gt; extract(text=&quot;Alice met Bob&quot;)  # doctest: +SKIP</span>
+<span class="sd">            {&#39;people&#39;: [&#39;Alice&#39;, &#39;Bob&#39;]}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">oa</span><span class="w"> </span><span class="kn">import</span> <span class="n">prompt_json_function</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">aix</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="s2">&quot;oa not installed. Install with: pip install oa&quot;</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;aix not installed. Install with: pip install aix&quot;</span><span class="p">)</span>
 
         <span class="n">template_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-        <span class="n">parse_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">defaults</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;defaults&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
-        <span class="k">return</span> <span class="n">prompt_json_function</span><span class="p">(</span>
-            <span class="n">template_str</span><span class="p">,</span>
-            <span class="n">json_schema</span><span class="o">=</span><span class="n">json_schema</span><span class="p">,</span>
-            <span class="n">defaults</span><span class="o">=</span><span class="n">parse_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">,</span> <span class="p">{}),</span>
-            <span class="o">**</span><span class="n">prompt_func_kwargs</span>
-        <span class="p">)</span></div>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">aix</span><span class="o">.</span><span class="n">prompt_func</span><span class="p">(</span><span class="n">template_str</span><span class="p">,</span> <span class="n">output_schema</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="o">**</span><span class="n">prompt_func_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_apply_defaults</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="TemplateCollection.create_prompt_functions">
 <a class="viewcode-back" href="../../module_docs/pyrompt/base.html#pyrompt.TemplateCollection.create_prompt_functions">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_prompt_functions</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">common_kwargs</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">common_kwargs</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create PromptFuncs collection from templates.</span>
+<span class="sd">        Create an ``aix.PromptFuncs`` collection from templates (one function per key).</span>
+
+<span class="sd">        LLM generation routes through :mod:`aix` (lazy import).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            keys: Template keys to include (None = all)</span>
-<span class="sd">            **common_kwargs: Common kwargs for all prompt_functions</span>
+<span class="sd">            **common_kwargs: Common kwargs for all prompt functions (e.g. &#39;model&#39;)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            PromptFuncs object with functions for each template</span>
+<span class="sd">            ``aix.PromptFuncs`` object with a function for each template</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; funcs = templates.create_prompt_functions()</span>
-<span class="sd">            &gt;&gt;&gt; result = funcs.greeting(name=&#39;Alice&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; import tempfile</span>
+<span class="sd">            &gt;&gt;&gt; from pyrompt import TemplateCollection</span>
+<span class="sd">            &gt;&gt;&gt; tc = TemplateCollection(&#39;demo&#39;, base_path=tempfile.mkdtemp())</span>
+<span class="sd">            &gt;&gt;&gt; tc[&#39;greeting.txt&#39;] = &quot;Greet {name}&quot;</span>
+<span class="sd">            &gt;&gt;&gt; funcs = tc.create_prompt_functions()</span>
+<span class="sd">            &gt;&gt;&gt; funcs[&#39;greeting.txt&#39;](name=&#39;Alice&#39;)  # doctest: +SKIP</span>
+<span class="sd">            &#39;Hello Alice!&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">oa</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptFuncs</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">aix</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="s2">&quot;oa not installed. Install with: pip install oa&quot;</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;aix not installed. Install with: pip install aix&quot;</span><span class="p">)</span>
 
         <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
-        <span class="c1"># Create dict of template_name -&gt; template_string</span>
-        <span class="n">template_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">}</span>
-
-        <span class="k">return</span> <span class="n">PromptFuncs</span><span class="p">(</span>
-            <span class="n">template_store</span><span class="o">=</span><span class="n">template_dict</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">common_kwargs</span>
-        <span class="p">)</span></div>
+        <span class="c1"># Build an aix.PromptFuncs collection: one prompt-function per template.</span>
+        <span class="n">funcs</span> <span class="o">=</span> <span class="n">aix</span><span class="o">.</span><span class="n">PromptFuncs</span><span class="p">(</span><span class="o">**</span><span class="n">common_kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="n">funcs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">funcs</span></div>
 
 
     <span class="c1"># MutableMapping interface delegates to _store</span>
@@ -499,7 +520,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
