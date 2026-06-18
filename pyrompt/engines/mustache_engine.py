@@ -26,12 +26,12 @@ class MustacheEngine(TemplateEngine):
 
     Examples:
         >>> # Requires pystache installed
-        >>> engine = MustacheEngine()
+        >>> engine = MustacheEngine()  # doctest: +SKIP
         >>> template = "Hello {{name}}!"
-        >>> engine.render(template, name="Alice")
+        >>> engine.render(template, name="Alice")  # doctest: +SKIP
         'Hello Alice!'
         >>> template = "{{#premium}}Thank you!{{/premium}}"
-        >>> engine.render(template, premium=True)
+        >>> engine.render(template, premium=True)  # doctest: +SKIP
         'Thank you!'
     """
 

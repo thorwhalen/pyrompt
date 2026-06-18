@@ -28,9 +28,12 @@ def quick_setup(
         Dict with 'prompts' and optionally 'templates' keys
 
     Example:
-        >>> collections = quick_setup('my_ai_project')
+        >>> import tempfile
+        >>> collections = quick_setup('my_ai_project', base_path=tempfile.mkdtemp())
         >>> collections['prompts']['system'] = "You are a helpful assistant."
-        >>> collections['templates']['greeting'] = "Hello {name}!"
+        >>> collections['templates']['greeting.txt'] = "Hello {name}!"
+        >>> sorted(collections)
+        ['prompts', 'templates']
     """
     from pyrompt import PromptCollection, TemplateCollection
 
@@ -60,11 +63,12 @@ def import_from_dict(
         metadata: Optional dict mapping keys to metadata dicts
 
     Example:
-        >>> prompts = PromptCollection('my_project')
-        >>> import_from_dict(prompts, {
-        ...     'system': 'You are helpful.',
-        ...     'user': 'Hello!'
-        ... })
+        >>> import tempfile
+        >>> from pyrompt import PromptCollection
+        >>> prompts = PromptCollection('my_project', base_path=tempfile.mkdtemp())
+        >>> import_from_dict(prompts, {'system': 'You are helpful.', 'user': 'Hello!'})
+        >>> sorted(prompts)
+        ['system', 'user']
     """
     for key, value in prompts.items():
         collection[key] = value
@@ -87,9 +91,12 @@ def export_to_dict(collection, include_metadata: bool = True) -> Dict[str, Any]:
         Dict with 'prompts' and optionally 'metadata' keys
 
     Example:
-        >>> prompts = PromptCollection('my_project')
-        >>> data = export_to_dict(prompts)
-        >>> print(data['prompts'])
+        >>> import tempfile
+        >>> from pyrompt import PromptCollection
+        >>> prompts = PromptCollection('my_project', base_path=tempfile.mkdtemp())
+        >>> prompts['system'] = 'You are helpful.'
+        >>> export_to_dict(prompts, include_metadata=False)
+        {'prompts': {'system': 'You are helpful.'}}
     """
     result = {"prompts": {key: collection[key] for key in collection}}
 
@@ -165,10 +172,15 @@ def merge_collections(target, *sources, conflict_strategy: str = "skip"):
         conflict_strategy: How to handle conflicts ('skip', 'overwrite', 'error')
 
     Example:
-        >>> target = PromptCollection('merged')
-        >>> source1 = PromptCollection('source1')
-        >>> source2 = PromptCollection('source2')
-        >>> merge_collections(target, source1, source2, conflict_strategy='skip')
+        >>> import tempfile
+        >>> from pyrompt import PromptCollection
+        >>> base = tempfile.mkdtemp()
+        >>> target = PromptCollection('merged', base_path=base)
+        >>> source1 = PromptCollection('source1', base_path=base)
+        >>> source1['a'] = 'A'
+        >>> merge_collections(target, source1, conflict_strategy='skip')
+        >>> sorted(target)
+        ['a']
     """
     for source in sources:
         for key in source:
@@ -222,7 +234,7 @@ def render_template_file(
         Rendered string
 
     Example:
-        >>> result = render_template_file(
+        >>> result = render_template_file(  # doctest: +SKIP
         ...     'templates/greeting.txt',
         ...     name='Alice'
         ... )
@@ -266,8 +278,8 @@ def create_project_structure(
         Path to created project directory
 
     Example:
-        >>> path = create_project_structure('my_ai_app')
-        >>> print(f"Project created at: {path}")
+        >>> path = create_project_structure('my_ai_app')  # doctest: +SKIP
+        >>> print(f"Project created at: {path}")  # doctest: +SKIP
     """
     from pyrompt import PromptCollection, TemplateCollection
 
@@ -308,9 +320,11 @@ def get_stats(collection) -> Dict[str, Any]:
         Dict with statistics
 
     Example:
-        >>> prompts = PromptCollection('my_project')
-        >>> stats = get_stats(prompts)
-        >>> print(stats['total_prompts'])
+        >>> import tempfile
+        >>> from pyrompt import PromptCollection
+        >>> prompts = PromptCollection('my_project', base_path=tempfile.mkdtemp())
+        >>> get_stats(prompts)['total_prompts']
+        0
     """
     stats = {
         "total_prompts": len(collection),

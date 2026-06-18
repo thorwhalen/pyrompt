@@ -66,9 +66,10 @@ def mk_prompt_store(rootdir: str, extension: str = "txt"):
     # Start with text files
     base = TextFiles(rootdir, max_levels=0)
 
-    # Filter for specific extension
+    # Filter for specific extension. ``filt_iter.suffixes(...)`` is a store
+    # *decorator* (takes an iterable of suffixes), applied to the base store.
     ext_with_dot = f".{extension}"
-    filtered = filt_iter(base, filt=filt_iter.suffixes(ext_with_dot))
+    filtered = filt_iter.suffixes([ext_with_dot])(base)
 
     # Hide extension from users
     store = wrap_kvs(
@@ -109,8 +110,9 @@ def mk_template_store(rootdir: str, extensions: Optional[list] = None):
     # Start with text files
     base = TextFiles(rootdir, max_levels=0)
 
-    # Filter for template extensions
-    filtered = filt_iter(base, filt=filt_iter.suffixes(*extensions))
+    # Filter for template extensions. ``filt_iter.suffixes(...)`` is a store
+    # *decorator* (takes an iterable of suffixes), applied to the base store.
+    filtered = filt_iter.suffixes(extensions)(base)
 
     # Add tab completion (keep extensions visible)
     return add_ipython_key_completions(filtered)
