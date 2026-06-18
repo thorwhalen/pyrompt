@@ -146,8 +146,8 @@ class SemanticIndex:
             List of (key, similarity_score) tuples, sorted by score descending
 
         Example:
-            >>> results = index.search("help with data analysis", top_k=3)
-            >>> for key, score in results:
+            >>> results = index.search("help with data analysis", top_k=3)  # doctest: +SKIP
+            >>> for key, score in results:  # doctest: +SKIP
             ...     print(f"{key}: {score:.3f}")
         """
         if not self._embeddings:

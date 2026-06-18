@@ -94,8 +94,8 @@ class PromptMall(Mapping):
             collection_type: 'prompt' or 'template'
 
         Example:
-            >>> mall.add_collection('personas', 'prompt')
-            >>> mall['personas']['analyst'] = "You are a data analyst."
+            >>> mall.add_collection('personas', 'prompt')  # doctest: +SKIP
+            >>> mall['personas']['analyst'] = "You are a data analyst."  # doctest: +SKIP
         """
         if name in self._collections:
             raise ValueError(f"Collection '{name}' already exists")

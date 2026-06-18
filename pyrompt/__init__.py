@@ -5,12 +5,14 @@ A flexible framework for managing, sharing, and searching prompts and prompt tem
 with support for multiple templating languages and idiomatic Python interfaces.
 
 Quick Start:
+    >>> import tempfile
     >>> from pyrompt import PromptCollection, TemplateCollection
-    >>> prompts = PromptCollection('my_project')
-    >>> templates = TemplateCollection('my_project')
+    >>> _base = tempfile.mkdtemp()
+    >>> prompts = PromptCollection('my_project', base_path=_base)
+    >>> templates = TemplateCollection('my_project', base_path=_base)
     >>> prompts['system'] = "You are a helpful Python expert."
-    >>> templates['greeting'] = "Hello, {name}!"
-    >>> print(templates.render('greeting', name='Alice'))
+    >>> templates['greeting.txt'] = "Hello, {name}!"
+    >>> print(templates.render('greeting.txt', name='Alice'))
     Hello, Alice!
 
 Main Components:

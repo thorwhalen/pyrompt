@@ -37,13 +37,13 @@ class GitHubPromptCollection(MutableMapping):
 
     Examples:
         >>> # Publishing a collection
-        >>> gh = GitHubPromptCollection(
+        >>> gh = GitHubPromptCollection(  # doctest: +SKIP
         ...     repo='username/my_prompts_pyrompt',
         ...     token='ghp_...',
         ...     readonly=False
         ... )
-        >>> gh['greeting'] = "Hello, {name}!"
-        >>> gh.sync()  # Commits and pushes to GitHub
+        >>> gh['greeting'] = "Hello, {name}!"  # doctest: +SKIP
+        >>> gh.sync()  # Commits and pushes to GitHub  # doctest: +SKIP
     """
 
     def __init__(
@@ -263,7 +263,7 @@ def fork_collection(
         GitHubPromptCollection for the new fork
 
     Example:
-        >>> forked = fork_collection(
+        >>> forked = fork_collection(  # doctest: +SKIP
         ...     'thorwhalen/awesome_prompts_pyrompt',
         ...     token='ghp_...'
         ... )
@@ -294,7 +294,7 @@ def clone_collection(repo: str, local_path: str, token: Optional[str] = None):
         token: Optional GitHub token
 
     Example:
-        >>> clone_collection(
+        >>> clone_collection(  # doctest: +SKIP
         ...     'thorwhalen/awesome_prompts_pyrompt',
         ...     '/tmp/my_prompts'
         ... )

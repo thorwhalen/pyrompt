@@ -66,9 +66,10 @@ def test_template_collection_parse(temp_dir):
     """Test template parsing."""
     coll = TemplateCollection('test', base_path=temp_dir)
 
-    coll['greeting'] = "Hello {name}, welcome to {place}!"
+    # TemplateCollection keeps the extension in the key (to detect the engine).
+    coll['greeting.txt'] = "Hello {name}, welcome to {place}!"
 
-    parsed = coll.parse('greeting')
+    parsed = coll.parse('greeting.txt')
     assert 'placeholders' in parsed
     assert set(parsed['placeholders']) == {'name', 'place'}
 
@@ -94,9 +95,9 @@ def test_template_collection_jinja2_if_available(temp_dir):
 def test_template_collection_to_prompt_function_mock(temp_dir):
     """Test converting template to function (mocked)."""
     coll = TemplateCollection('test', base_path=temp_dir)
-    coll['greet'] = "Hello {name}!"
+    coll['greet.txt'] = "Hello {name}!"
 
-    # Note: Would need oa installed to actually test this
+    # Note: Would need aix installed to actually test this
     # Here we just test that the method exists
     assert hasattr(coll, 'to_prompt_function')
     assert hasattr(coll, 'to_prompt_json_function')

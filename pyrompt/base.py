@@ -23,6 +23,25 @@ from pyrompt.engines import (
 )
 
 
+def _apply_defaults(fn: Callable, defaults: dict) -> Callable:
+    """Wrap an ``aix`` prompt-function so the template's parsed defaults are applied.
+
+    ``aix.prompt_func`` extracts ``{var:default}`` defaults from the template itself,
+    but this also carries defaults surfaced by non-format engines (e.g. Jinja), so
+    behaviour matches the old ``oa.prompt_function(defaults=...)`` regardless of engine.
+    """
+    if not defaults:
+        return fn
+
+    from functools import wraps
+
+    @wraps(fn)
+    def with_defaults(**kwargs):
+        return fn(**{**defaults, **kwargs})
+
+    return with_defaults
+
+
 class PromptCollection(MutableMapping):
     """
     Collection of prompts with MutableMapping interface.
@@ -30,7 +49,8 @@ class PromptCollection(MutableMapping):
     Backed by file storage via dol, with optional metadata.
 
     Examples:
-        >>> prompts = PromptCollection('my_project')
+        >>> import tempfile
+        >>> prompts = PromptCollection('my_project', base_path=tempfile.mkdtemp())
         >>> prompts['system'] = "You are a helpful assistant."
         >>> print(prompts['system'])
         You are a helpful assistant.
@@ -111,13 +131,14 @@ class TemplateCollection(MutableMapping):
     or content. Provides rendering capabilities.
 
     Examples:
-        >>> templates = TemplateCollection('my_project')
+        >>> import tempfile
+        >>> templates = TemplateCollection('my_project', base_path=tempfile.mkdtemp())
         >>> templates['greeting.txt'] = "Hello {name}!"
         >>> templates.render('greeting.txt', name='Alice')
         'Hello Alice!'
         >>> # With Jinja2 (if installed)
         >>> templates['greeting.jinja2'] = "Hello {{ name }}!"
-        >>> templates.render('greeting.jinja2', name='Bob')
+        >>> templates.render('greeting.jinja2', name='Bob')  # doctest: +SKIP
         'Hello Bob!'
     """
 
@@ -206,8 +227,10 @@ class TemplateCollection(MutableMapping):
             Rendered template string
 
         Example:
-            >>> templates['greeting'] = "Hello {name}!"
-            >>> templates.render('greeting', name='Alice')
+            >>> import tempfile
+            >>> templates = TemplateCollection('demo', base_path=tempfile.mkdtemp())
+            >>> templates['greeting.txt'] = "Hello {name}!"
+            >>> templates.render('greeting.txt', name='Alice')
             'Hello Alice!'
         """
         template_str = self._store[key]
@@ -227,8 +250,10 @@ class TemplateCollection(MutableMapping):
             Dict with 'placeholders', 'defaults', 'metadata'
 
         Example:
-            >>> templates['greeting'] = "Hello {name}!"
-            >>> info = templates.parse('greeting')
+            >>> import tempfile
+            >>> templates = TemplateCollection('demo', base_path=tempfile.mkdtemp())
+            >>> templates['greeting.txt'] = "Hello {name}!"
+            >>> info = templates.parse('greeting.txt')
             >>> info['placeholders']
             ['name']
         """
@@ -238,107 +263,114 @@ class TemplateCollection(MutableMapping):
 
     def to_prompt_function(self, key: str, **prompt_func_kwargs):
         """
-        Convert template to an AI-enabled function using oa.prompt_function.
+        Convert template to an AI-enabled function using ``aix.prompt_func``.
+
+        LLM generation is routed through :mod:`aix` (the multi-provider facade) so the
+        model/provider is switchable. ``aix`` is imported lazily, only when called.
 
         Args:
             key: Template key
-            **prompt_func_kwargs: Additional kwargs for prompt_function
-                (e.g., 'system', 'model', 'temperature')
+            **prompt_func_kwargs: Additional kwargs for ``aix.prompt_func``
+                (e.g., 'model', 'temperature', 'name')
 
         Returns:
-            Callable function that invokes LLM with rendered template
+            Callable function that invokes the LLM with the rendered template
 
         Example:
-            >>> from oa import prompt_function
-            >>> templates['explain'] = "Explain {concept} in simple terms."
-            >>> explain = templates.to_prompt_function('explain')
-            >>> result = explain(concept="quantum computing")
+            >>> import tempfile
+            >>> from pyrompt import TemplateCollection
+            >>> tc = TemplateCollection('demo', base_path=tempfile.mkdtemp())
+            >>> tc['explain.txt'] = "Explain {concept} in simple terms."
+            >>> explain = tc.to_prompt_function('explain.txt')
+            >>> explain(concept="quantum computing")  # doctest: +SKIP
+            'Quantum computing is ...'
         """
         try:
-            from oa import prompt_function
+            import aix
         except ImportError:
-            raise ImportError("oa not installed. Install with: pip install oa")
+            raise ImportError("aix not installed. Install with: pip install aix")
 
         template_str = self._store[key]
-        parse_info = self.parse(key)
+        defaults = self.parse(key).get("defaults", {})
 
-        return prompt_function(
-            template_str, defaults=parse_info.get("defaults", {}), **prompt_func_kwargs
-        )
+        fn = aix.prompt_func(template_str, **prompt_func_kwargs)
+        return _apply_defaults(fn, defaults)
 
     def to_prompt_json_function(
         self, key: str, json_schema: dict, **prompt_func_kwargs
     ):
         """
-        Convert template to JSON-returning AI function.
+        Convert template to a JSON-returning AI function.
 
-        Uses oa.prompt_json_function to ensure structured output.
+        Uses ``aix.prompt_func(output_schema=dict)``: aix requests JSON and parses it
+        robustly (tolerating fenced output), returning a parsed dict. ``json_schema`` is
+        accepted for API compatibility; aix does best-effort JSON rather than strict
+        JSON-Schema enforcement. LLM generation routes through :mod:`aix` (lazy import).
 
         Args:
             key: Template key
-            json_schema: JSON schema for output validation
-            **prompt_func_kwargs: Additional kwargs
+            json_schema: Desired JSON schema (kept for API compatibility)
+            **prompt_func_kwargs: Additional kwargs for ``aix.prompt_func``
 
         Returns:
-            Function that returns parsed JSON dict
+            Function that returns a parsed JSON dict
 
         Example:
-            >>> schema = {
-            ...     "name": "entities",
-            ...     "schema": {
-            ...         "type": "object",
-            ...         "properties": {
-            ...             "people": {"type": "array", "items": {"type": "string"}}
-            ...         }
-            ...     }
-            ... }
-            >>> templates['extract'] = "Extract people from: {text}"
-            >>> extract = templates.to_prompt_json_function('extract', schema)
-            >>> result = extract(text="Alice met Bob")
+            >>> import tempfile
+            >>> from pyrompt import TemplateCollection
+            >>> tc = TemplateCollection('demo', base_path=tempfile.mkdtemp())
+            >>> tc['extract.txt'] = "Extract people from: {text}"
+            >>> extract = tc.to_prompt_json_function('extract.txt', {})
+            >>> extract(text="Alice met Bob")  # doctest: +SKIP
+            {'people': ['Alice', 'Bob']}
         """
         try:
-            from oa import prompt_json_function
+            import aix
         except ImportError:
-            raise ImportError("oa not installed. Install with: pip install oa")
+            raise ImportError("aix not installed. Install with: pip install aix")
 
         template_str = self._store[key]
-        parse_info = self.parse(key)
+        defaults = self.parse(key).get("defaults", {})
 
-        return prompt_json_function(
-            template_str,
-            json_schema=json_schema,
-            defaults=parse_info.get("defaults", {}),
-            **prompt_func_kwargs,
-        )
+        fn = aix.prompt_func(template_str, output_schema=dict, **prompt_func_kwargs)
+        return _apply_defaults(fn, defaults)
 
     def create_prompt_functions(
         self, keys: Optional[List[str]] = None, **common_kwargs
     ):
         """
-        Create PromptFuncs collection from templates.
+        Create an ``aix.PromptFuncs`` collection from templates (one function per key).
+
+        LLM generation routes through :mod:`aix` (lazy import).
 
         Args:
             keys: Template keys to include (None = all)
-            **common_kwargs: Common kwargs for all prompt_functions
+            **common_kwargs: Common kwargs for all prompt functions (e.g. 'model')
 
         Returns:
-            PromptFuncs object with functions for each template
+            ``aix.PromptFuncs`` object with a function for each template
 
         Example:
-            >>> funcs = templates.create_prompt_functions()
-            >>> result = funcs.greeting(name='Alice')
+            >>> import tempfile
+            >>> from pyrompt import TemplateCollection
+            >>> tc = TemplateCollection('demo', base_path=tempfile.mkdtemp())
+            >>> tc['greeting.txt'] = "Greet {name}"
+            >>> funcs = tc.create_prompt_functions()
+            >>> funcs['greeting.txt'](name='Alice')  # doctest: +SKIP
+            'Hello Alice!'
         """
         try:
-            from oa import PromptFuncs
+            import aix
         except ImportError:
-            raise ImportError("oa not installed. Install with: pip install oa")
+            raise ImportError("aix not installed. Install with: pip install aix")
 
         keys = keys or list(self._store.keys())
 
-        # Create dict of template_name -> template_string
-        template_dict = {k: self._store[k] for k in keys}
-
-        return PromptFuncs(template_store=template_dict, **common_kwargs)
+        # Build an aix.PromptFuncs collection: one prompt-function per template.
+        funcs = aix.PromptFuncs(**common_kwargs)
+        for k in keys:
+            funcs.add(k, self._store[k])
+        return funcs
 
     # MutableMapping interface delegates to _store
     def __getitem__(self, key: str) -> str:
